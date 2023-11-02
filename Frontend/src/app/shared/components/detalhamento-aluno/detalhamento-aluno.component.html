@@ -1,0 +1,203 @@
+<div class="container">
+
+    <!-- Dados do aluno -->
+    <section>
+        <h2 class="container-title">Informações do aluno</h2>
+        <!-- Dados aluno -->
+        <div class="div-container-table">
+            <table class="container-table">
+                <thead class="container-table-header">
+                    <tr class="container-table-header-row">
+                        <th class="container-table-header-row-th
+                        ">ID</th>
+                        <th class="container-table-header-row-th
+                        ">Nome</th>
+                        <th class="container-table-header-row-th
+                        ">Gênero</th>
+                        <th class="container-table-header-row-th
+                        ">CPF</th>
+                        <th class="container-table-header-row-th
+                        ">Telefone</th>
+                        <th class="container-table-header-row-th
+                        ">E-mail</th>
+                        <th class="container-table-header-row-th
+                        ">Senha</th>
+                        <th class="container-table-header-row-th
+                        ">Matrícula aluno</th>
+                        <th class="container-table-header-row-th
+                        ">CEP</th>
+                        <th class="container-table-header-row-th
+                        ">Cidade</th>
+                        <th class="container-table-header-row-th
+                        ">Bairro</th>
+                        <th class="container-table-header-row-th
+                        ">UF</th>
+                        <th class="container-table-header-row-th
+                        ">Logradouro</th>
+                        <th class="container-table-header-row-th
+                        ">Número</th>
+                        <th class="container-table-header-row-th
+                        ">Complemento</th>
+                        <th class="container-table-header-row-th
+                        ">Ponto de referência</th>
+                    </tr>
+                </thead>
+                <tbody class="container-table-body">
+                    <tr class="container-table-body-row">
+                        <td class="container-table-body-row-td">{{aluno?.id}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.nome}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.genero}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.cpf}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.telefone}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.email}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.senha}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.matricula_Aluno}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.cep}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.bairro}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.uf}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.localidade}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.logradouro}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.numero}}</td>
+                        <td class="container-table-body-row-td">{{aluno?.complemento}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+
+    <!-- Atendimentos -->
+    <section>
+        <h3 class="container-subtitle">
+            Histórico de atendimentos
+        </h3>
+
+        <div class="container-cards">
+
+            <div *ngFor="let atendimento of atendimentos" class="container-cards-card">
+                <!-- Info -->
+                <p class="container-cards-card-p">
+                    Data
+                    <span class="container-cards-card-span">{{atendimento.data}}</span>
+                </p>
+                <p class="container-cards-card-p">
+                    Descrição
+                    <span class="container-cards-card-span">{{atendimento.descricao}}</span>
+                </p>
+                <p class="container-cards-card-p">
+                    Pedagogo
+                    <span class="container-cards-card-span">{{atendimento.pedagogo_nome.nome}}</span>
+                </p>
+                <!-- Botões -->
+                <div class="container-cards-card-ctn-button">
+                    <button (click)="redirecionarFormAtendimento(atendimento.id)"
+                    class="container-cards-card-ctn-button-editar">
+                        Editar
+                        <img src="../../../../assets/dashboard/pencil.svg" style="height: 13px;">
+                    </button>
+
+                    <button (click)="deletarAtendimento(atendimento.id)"
+                    class="container-cards-card-ctn-button-deletar">
+                        <img src="../../../../assets/dashboard/trash.svg">
+                        Deletar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+     <!-- Exercicios -->
+     <section>
+        <h3 class="container-subtitle">
+            Histórico de exercícios
+        </h3>
+
+        <div class="container-cards">
+            <div *ngFor="let exercicio of exercicios" class="container-cards-card">
+                <!-- Info -->
+                <p class="container-cards-card-p">
+                    Data
+                    <span class="container-cards-card-span">{{exercicio.data_Conclusao}}</span>
+                </p>
+                <p class="container-cards-card-p">
+                    Descrição
+                    <span class="container-cards-card-span">{{exercicio.descricao}}</span>
+                </p>
+                <p class="container-cards-card-p">
+                    Matéria
+                    <span class="container-cards-card-span">{{exercicio.materia}}</span>
+                </p>
+                <p class="container-cards-card-p">
+                    Professor
+                    <span class="container-cards-card-span">{{exercicio.professor_nome.nome}}</span>
+                </p>
+                 <!-- Botões -->
+                 <div class="container-cards-card-ctn-button">
+                    <button (click)="redirecionarFormExercicio()"
+                    class="container-cards-card-ctn-button-editar">
+                        Editar
+                        <img src="../../../../assets/dashboard/pencil.svg" style="height: 13px;">
+                    </button>
+
+                    <button (click)="deletarExercicio(exercicio.id)"
+                    class="container-cards-card-ctn-button-deletar">
+                        <img src="../../../../assets/dashboard/trash.svg">
+                        Deletar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Avaliações -->
+    <section>
+        <h3 class="container-subtitle">
+            Histórico de avaliações
+        </h3>
+
+        <div class="container-cards">
+            <div *ngFor="let avaliacao of avaliacoes" class="container-cards-card">
+                <!-- Info -->
+                <p class="container-cards-card-p">
+                    Data
+                    <span class="container-cards-card-span">{{avaliacao.data_Conclusao}}</span>
+                </p>
+                <p class="container-cards-card-p">
+                    Descrição
+                    <span class="container-cards-card-span">{{avaliacao.descricao}}</span>
+                </p>
+                <p class="container-cards-card-p">
+                    Matéria
+                    <span class="container-cards-card-span">{{avaliacao.materia}}</span>
+                </p>
+                <p class="container-cards-card-p">
+                    Professor
+                    <span class="container-cards-card-span">{{avaliacao.professor_nome.nome}}</span>
+                </p>
+                <p class="container-cards-card-p">
+                    Pontuação máxima
+                    <span class="container-cards-card-span">{{avaliacao.pontuacao_Maxima}}</span>
+                </p>
+                <p class="container-cards-card-p">
+                   Nota
+                    <span class="container-cards-card-span">{{avaliacao.nota}}</span>
+                </p>
+                 <!-- Botões -->
+                 <div class="container-cards-card-ctn-button">
+                    <button (click)="redirecionarFormAvaliacao()"
+                    class="container-cards-card-ctn-button-editar">
+                        Editar
+                        <img src="../../../../assets/dashboard/pencil.svg" style="height: 13px;">
+                    </button>
+
+                    <button (click)="deletarAvaliacao(avaliacao.id)"
+                    class="container-cards-card-ctn-button-deletar">
+                        <img src="../../../../assets/dashboard/trash.svg">
+                        Deletar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

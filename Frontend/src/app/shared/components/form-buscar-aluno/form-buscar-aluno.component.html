@@ -1,0 +1,217 @@
+<!-- [ngClass]="{'is-invalid': submitted && registerForm.controls?.['cep']?.errors}" -->
+
+<div class="container">
+  <form [formGroup]="registerForm" class="form">
+    <div class="form-group" formGroupName="Endereco">
+      <div class="form-group">
+        <div class="form-floating mb-3">
+          <input type="text"
+                 formControlName="Buscar Aluno"
+                 class="form-control"
+                 (change)="Buscar()"
+                 placeholder="Aluno" />
+          <label for="cep">CEP</label>
+        </div>
+      </div>
+
+      <div *ngIf="end">
+        <div class="form-group">
+          <div class="form-floating mb-3">
+            <input type="text"
+                   formControlName="uf"
+                   [readOnly]="true"
+                   [(ngModel)]="end.uf"
+                   class="form-control"
+                   placeholder="uf" />
+            <label for="uf">uf</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-floating mb-3">
+            <input type="text"
+                   [readOnly]="true"
+                   formControlName="bairro"
+                   [(ngModel)]="end.bairro"
+                   class="form-control"
+                   placeholder="Bairro" />
+            <label for="bairro">Bairro</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-floating mb-3">
+            <input type="text"
+                   [readOnly]="true"
+                   formControlName="logradouro"
+                   [ngModel]="end.logradouro"
+                   class="form-control"
+                   placeholder="Rua" />
+            <label for="rua">Rua</label>
+          </div>
+
+          <div class="form-group">
+            <div class="form-floating mb-3">
+              <input type="text"
+                     [readOnly]="true"
+                     formControlName="localidade"
+                     [ngModel]="end.localidade"
+                     class="form-control"
+                     placeholder="localidade" />
+              <label for="localidade">Localidade</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-floating mb-3">
+              <input type="text"
+                     formControlName="numero"
+                     class="form-control"
+                     placeholder="numero" />
+              <label for="numero">Número</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-floating mb-3">
+              <input type="text"
+                     formControlName="complemento"
+                     class="form-control"
+                     placeholder="complemento" />
+              <label>Complemento</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-floating">
+      <input type="text"
+             class="form-control"
+             formControlName="nome"
+             id="floatingInputValue" />
+      <label for="floatingInputValue">Nome</label>
+    </div>
+
+    <div class="row">
+      <!-- Gênero -->
+      <div class="col-md">
+        <div class="form-floating">
+          <label class="label-select" for="floatingInputValue">Gênero</label>
+          <select class="form-select"
+                  formControlName="genero"
+                  aria-label="Default select example">
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+      </div>
+      <!-- Tipo -->
+      <div class="col-md">
+        <div class="form-floating">
+          <label class="label-select" for="floatingInputValue">Tipo</label>
+          <select class="form-select" formControlName="tipo">
+            <option value="administrador">Administrador</option>
+            <option value="pedagogo">Pedagogo</option>
+            <option value="professor">Professor</option>
+            <option value="aluno">Aluno</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- CPF -->
+      <div class="col-md">
+        <div class="form-floating">
+          <input type="text"
+                 class="form-control"
+                 formControlName="cpf"
+                 mask="000.000.000-00"
+                 id="floatingInputValue" />
+          <label for="floatingInputValue">CPF</label>
+        </div>
+      </div>
+      <!-- Telefone -->
+      <div class="col-md">
+        <div class="form-floating">
+          <input [ngClass]="{
+              'is-invalid':
+                submitted && registerForm.controls['telefone']?.errors
+            }"
+                 type="text"
+                 formControlName="telefone"
+                 class="form-control"
+                 mask="(00) 0 0000-0000"
+                 id="floatingInputValue" />
+          <label for="floatingInputValue">Telefone</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Email -->
+      <div class="col-md">
+        <div class="form-floating">
+          <input type="email"
+                 formControlName="email"
+                 class="form-control"
+                 id="floatingInputValue" />
+          <label for="floatingInputValue">Email</label>
+        </div>
+      </div>
+      <!-- Senha -->
+      <div class="col-md">
+        <div class="form-floating">
+          <input type="password"
+                 class="form-control"
+                 formControlName="senha"
+                 id="floatingInputValue" />
+          <label for="floatingInputValue">Senha</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="row">
+        <!-- Código professor -->
+        <div class="col-md">
+          <div class="form-floating">
+            <input type="text"
+                   formControlName="codigo_Registro_Professor"
+                   class="form-control"
+                   id="floatingInputValue" />
+            <label for="floatingInputValue">Código professor</label>
+          </div>
+        </div>
+      </div>
+      <!-- Matrícula aluno -->
+      <div class="col-md">
+        <div class="form-floating">
+          <input type="text"
+                 class="form-control"
+                 formControlName="matricula_Aluno"
+                 id="floatingInputValue" />
+          <label for="floatingInputValue">Matrícula aluno</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="form-check">
+      <input class="form-check-input"
+             type="checkbox"
+             value="true"
+             id="flexCheckCheckedDisabled"
+             checked
+             disabled />
+      <label class="form-check-label" for="flexCheckCheckedDisabled">
+        Ativo
+      </label>
+    </div>
+  </form>
+  <div class="div-btn">
+    <button (click)="OnSubmitUser()" class="btn btn-dark">REGISTRAR</button>
+  </div>
+</div>

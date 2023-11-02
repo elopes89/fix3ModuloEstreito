@@ -1,0 +1,59 @@
+<!-- Cards lista alunos -->
+<section class="container">
+    <h3 class="container-title">
+        {{titulo}}
+    </h3>
+
+    <!-- Buscar -->
+    <div class="container-form">
+        <form id="form-search" class="d-flex" role="search">
+
+            <input class="form-control me-2" name="search" type="search" placeholder="Procurar..." aria-label="Search"
+                [(ngModel)]="pesquisa">
+
+            <button id="form-search-btn"
+            class="btn btn-link" (click)="search()">
+                Buscar
+            </button>
+        </form>
+    </div>
+
+    <!-- Card -->
+    <div class="container-cards">
+        <div class="container-cards-user-card" *ngFor="let user of listaValores">
+            <!-- Aluno info -->
+            <img style="width: 30px;" src="../../../../assets/dashboard/person.svg" alt="Ícone representando usuário">
+            <h5 class="container-cards-user-card-name">
+                {{user.nome}}
+            </h5>
+            <p class="container-cards-user-card-info">
+                {{user.telefone}}
+            </p>
+            <p class="container-cards-user-card-info">
+                {{user.cpf}}
+            </p>
+            <!-- Botões -->
+            <div class="container-cards-user-card-ctn-button">
+                <button (click)="redirecionarFormEditar(user.id)"
+                class="container-cards-user-ctn-button-editar">
+                    Editar
+                    <img src="../../../../assets/dashboard/pencil.svg" style="height: 13px;">
+                </button>
+
+                <button (click)="deletarUsuario(user.id)" 
+                class="container-cards-user-ctn-button-deletar">
+                    <img src="../../../../assets/dashboard/trash.svg">
+                    Deletar
+                </button>
+            </div>
+
+            <!-- Link "Ver mais" -->
+            <a routerLink="/private/detalhamento-aluno"
+            *ngIf="user.tipo == 'Aluno'"
+            class="container-cards-user-card-detalhamento"
+            href="#">
+                Ver mais
+            </a>
+        </div>
+    </div>
+</section>

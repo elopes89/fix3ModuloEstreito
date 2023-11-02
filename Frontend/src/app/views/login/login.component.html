@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <div class="container-formulario">
+    <h1>LOGIN</h1>
+
+    <form [formGroup]="registerForm" class="form">
+      <div class="form-floating">
+        <input
+          [ngClass]="{
+            'is-invalid': submitted && registerForm.controls['email']?.errors
+          }"
+          type="email"
+          formControlName="email"
+          class="form-control"
+          id="floatingInputValue"
+          placeholder="email"
+        />
+        <label for="floatingInputValue">Email</label>
+
+        <div
+          *ngIf="submitted && registerForm.controls?.['email']?.errors"
+          class="text-danger"
+        >
+          <div *ngIf="registerForm.controls?.['email']?.errors?.['email']">
+            O Email é obrigatório!!
+          </div>
+        </div>
+
+        <div class="form-floating">
+          <input
+            [ngClass]="{
+              'is-invalid': submitted && registerForm.controls['email']?.errors
+            }"
+            type="text"
+            formControlName="senha"
+            class="form-control"
+            id="floatingInputValue"
+            placeholder="senha"
+          />
+          <label for="floatingInputValue">Senha</label>
+        </div>
+        <button class="btn btn-success w-100" (click)="OnSubmit()">
+          Entrar
+        </button>
+      </div>
+    </form>
+
+    <div id="container-button">
+      <!-- Botão modal cadastrar conta -->
+      <button
+        type="button"
+        class="btn btn-link"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Cadastrar conta
+      </button>
+
+      <!-- Botão resetar senha -->
+      <button type="button" class="btn btn-link">Esqueci minha senha</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">AVISO</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        Para criar uma conta entre um contato com o administrador
+      </div>
+    </div>
+  </div>
+</div>

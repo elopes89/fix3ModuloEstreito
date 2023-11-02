@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap');
+
+.container {
+  width: 90%;
+  margin: 0px;
+}
+
+.container-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 4700;
+  color: #172c3c;
+  padding: 20px;
+  width: 100%;
+  background-color: #00858569;
+  border: 0.7px solid black;
+  border-radius: 8px;
+}
+
+img {
+  margin-left: 7px;
+  margin-bottom: 2px;
+}
+
+.container-button {
+  display: flex;
+  width: 100%;
+  margin-top: 30px;
+  justify-content: space-around;
+}
+
+.btn.btn-secondary {
+  font-size: 14px;
+  font-weight: 200;
+  font-family: 'Nunito', sans-serif;
+  color: black;
+  padding-right: 100px;
+  padding-left: 100px;
+  height: 50px;
+  margin-top: 20px;
+  border-color: #f69c0bb0;
+  background-color: #f69c0b80;
+}
+
+.btn.btn-secondary:hover {
+  color: white;
+  border-color: #f69a0b;
+  background-color: #f69a0b
+}
+
+.container-formularios {
+  width: 100%;
+  margin-top: 30px;
+}
+
+@media (max-width: 986px) {
+  .container-button {
+    flex-direction: column;
+    align-items:  center;
+  }
+  .btn.btn-secondary {
+    padding-right: 50px;
+    padding-left: 50px;
+    width: 70%;
+  }
+}

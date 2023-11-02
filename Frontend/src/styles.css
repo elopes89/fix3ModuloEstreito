@@ -1,0 +1,7 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+@import "./assets/fontes/poppins.css";
+
+html, body {
+    width: 100vw;
+}

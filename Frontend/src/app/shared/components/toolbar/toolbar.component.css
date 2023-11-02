@@ -1,0 +1,54 @@
+
+.toolbar {
+    position: fixed;
+    height: 62px;
+    width: 100vw;
+    background-color: white;
+    z-index: 2;
+    box-shadow: 18px 1px 12px 3px rgba(215, 222, 227, 0.39);
+
+}
+
+.toolbar-container {
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toolbar-logo {
+    width: 45px;
+    margin-left: 25px;
+
+}
+
+.toolbar-titulo {
+    margin-top: 16px;
+    border-bottom: 3px solid black;
+    padding-bottom: 11.5px;
+    font-size: 24px;
+}
+
+.toolbar-usuario {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 30px;
+    margin-right: 70px;
+}
+
+.toolbar-nome-usuario {
+    font-size: 13px;
+    font-weight: 300;
+    color: #103A57;
+}
+
+@media (max-width: 647px) {
+    .toolbar-usuario {
+        display: none;
+    }
+    .toolbar-container{
+        justify-content: flex-start;
+        gap: 200px;
+    }
+}

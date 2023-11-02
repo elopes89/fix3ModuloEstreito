@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500&display=swap');
+
+.container-fluid {
+    background-color: #103A57;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.container-formulario {
+    background-color: #f2f2f2;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 45%;
+    height: 60%;
+    border: 1.2px solid black;
+}
+
+h1 {
+    font-weight: 200;
+    color: black;
+}
+
+form,
+div#container-button, #button-login {
+    width: 80%;
+}
+
+.form-floating {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border-color: black;
+    border-width: 0.5px;
+}
+
+#container-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn.btn-link {
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+}
+
+.btn.btn-link:hover {
+    text-decoration: underline;
+}
+
+.modal-body {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+@media (max-width: 1490px) {
+    .container-formulario {
+        width: 50%;
+    }
+}
+
+@media (max-width: 1085px) {
+    .container-formulario {
+        width: 60%;
+    }
+}
+
+@media (max-width: 900px) {
+    .container-formulario {
+        width: 70%;
+    }
+}
+
+@media (max-width: 700px) {
+    .container-formulario {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-formulario {
+        width: 90%;
+    }
+
+    #container-button {
+        flex-direction: column;
+    }
+
+    .btn.btn-link {
+        font-size: 12px;
+    }
+}

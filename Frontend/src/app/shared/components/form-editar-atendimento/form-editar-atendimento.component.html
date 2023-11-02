@@ -1,0 +1,83 @@
+<!-- <div class="container">
+  <h1 class="container-title">Editar atendimento</h1>
+
+  <form class="form" [formGroup]="editarForm" #form="ngForm">
+    <div class="form-floating mb-3">
+      <select
+        class="form-select"
+        formControlName="aluno"
+        name="aluno"
+        id="aluno"
+      >
+        <option selected>Selecione</option>
+        <option *ngFor="let aluno of alunos" [value]="aluno.id">
+          {{ aluno.nome }}
+        </option>
+      </select>
+      <label for="aluno">Aluno</label>
+      <span class="mensagem-erro" *ngIf="mensagemErroSelect('aluno')">
+        A seleção de um aluno é obrigatório
+      </span>
+    </div>
+
+    <div class="form-floating mb-3">
+      <select
+        class="form-select"
+        formControlName="pedagogo"
+        name="pedagogo"
+        id="pedagogo"
+      >
+        <option selected>Selecione</option>
+        <option *ngFor="let pedagogo of pedagogos" [value]="pedagogo.id">
+          {{ pedagogo.nome }}
+        </option>
+      </select>
+      <label for="aluno">Pedagogo</label>
+      <span class="mensagem-erro" *ngIf="mensagemErroSelect('pedagogo')">
+        A seleção de um pedagogo é obrigatório
+      </span>
+    </div>
+
+    <div class="form-floating mb-3">
+      <textarea
+        class="form-control"
+        formControlName="descricao"
+        name="descricao"
+        id="descricao"
+        rows="5"
+      >
+      </textarea>
+      <label for="descricao">Descrição</label>
+      <span class="mensagem-erro" *ngIf="mensagemErro('descricao')">
+        O preenchimento do campo descrição é obrigatório
+      </span>
+    </div>
+
+    
+    <div class="form-floating mb-3">
+      <input
+        type="date"
+        class="form-control"
+        formControlName="data"
+        name="data"
+        id="data"
+      />
+      <label for="data">Data</label>
+      <span class="mensagem-erro" *ngIf="mensagemErro('data')">
+        O preenchimento do campo data é obrigatório
+      </span>
+    </div>
+
+    <div class="div-btn">
+      <button
+        id="btn-salvar"
+        type="submit"
+        class="btn btn-success d-grid w-100"
+        [disabled]="this.form.form.invalid"
+        (click)="editarAtendimento()"
+      >
+        Salvar
+      </button>
+    </div>
+  </form>
+</div> -->

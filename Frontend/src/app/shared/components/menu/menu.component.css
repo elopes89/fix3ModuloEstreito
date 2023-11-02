@@ -1,0 +1,93 @@
+body {
+  position: relative;
+}
+
+.sidenav {
+  position: fixed;
+  top: 62px;
+  background-color: white;
+  transition: all 2.5s auto; 
+  z-index: 100;
+  min-height: 92vh;
+  width: 100px;
+  box-shadow: 8px 20px 12px 3px rgba(215, 222, 227, 0.39);
+}
+
+.sidenav-aberto {
+  width: 250px;
+  box-shadow: none;
+}
+
+.sidenav-aberto-button {
+  display: flex;
+  align-items: flex-start;
+  padding-left: 23px;
+}
+
+ 
+.img-toggler {
+  margin: 0px;
+}
+
+.btn.btn-link:hover{
+  background-color: rgba(255, 255, 255, 0.521);
+  border-radius: 8px;
+}
+
+.sidenav-container {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 13px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.sidenav-links {
+  list-style: none;
+  cursor: pointer;
+  padding-left: 8px;
+}
+
+.sidenav-links-item {
+  margin-top: 25px;
+}
+
+.sidenav-nav-link {
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  color: black;
+  font-weight: 200;
+  font-size: 14px;
+}
+
+.sidenav-nav-link:hover {
+  font-weight: 500;
+}
+
+.sidenav-nav-link-selecionado {
+  border: 1px solid #103A57;
+  font-weight: 500;
+  padding: 8px 13px;
+  border-radius: 8px;
+  background: #F9F9FA;
+}
+
+#btn-sair {
+  margin-top: 40px;
+  color: white;
+  background-color: #103A57;
+  font-weight: 200;
+  font-size: 14px;
+}
+#btn-sair:hover {
+  font-weight: 400;
+}
+
+img {
+  margin-bottom: 6px;
+  margin-right: 7px;
+}
