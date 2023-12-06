@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, lastValueFrom } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IEndereco } from '../interfaces/IEndereco';
 import { IUsuario } from '../interfaces/IUsuario';
 import { ILogin } from '../interfaces/ILogin';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ILog } from '../interfaces/ILog';
+import { IEmail } from '../interfaces/IEmail';
+import { IEmailDto } from '../interfaces/IEmailDto';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +38,7 @@ export class FrontService {
     return this.http.post<typeof t>(`${this.apiBackBase}/${endpoint}`, usuario);
   }
 
-  edit(usuario: any, id: number): Observable<IUsuario> {
+  edit(usuario: IUsuario, id: number): Observable<IUsuario> {
     return this.http.put<IUsuario>(`${this.apiBackBase}/api/usuarios/${id}`, usuario)
   }
   getId(id: number, endPoint: string, t: any): Observable<typeof t> {
@@ -71,8 +73,34 @@ export class FrontService {
       usuario_Id: [sessionStorage.getItem('userId')],
       detalhes: [detalhes]
     });
+  }
+
+  ResetarSenha(email: IEmail): Observable<IEmail> {
+    return this.http.post<IEmail>(`${this.apiBackBase}/api/email`, email)
+  }
+
+  EditarSenha(emailDto: IEmailDto): Observable<IEmailDto> {
+    return this.http.put<IEmailDto>(`${this.apiBackBase}/resetar`, emailDto)
 
   }
 
+  AjustFone(telefone: any): string {
+    var tel = ['(']
+    if (telefone != null) {
+      for (let i = 0; i < telefone.length; i++) {
+        tel.push(telefone[i]);
+      }
+      tel.splice(3, 1, ') 9 ');
+      tel.splice(7, 1, `${telefone.at(7)}-`);
+    }
+    telefone = tel.join('');
+    return telefone;
+  }
+
+  EnviarEmail(email: any): Observable<any> {
+    return this.http.post<any>(`${this.apiBackBase}/api/email`, email);
+  }
+
+  numVericacao = 0;
 
 }

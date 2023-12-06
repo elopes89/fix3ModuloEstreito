@@ -4023,11 +4023,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\djblabla\\Desktop\\M3P-BackEnd-Squad2 - Copia\\Backend\\Backend\\Backend.csproj",
+      "projectUniqueName": "C:\\Users\\djblabla\\Desktop\\FullStackEstreito\\Backend\\Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "C:\\Users\\djblabla\\Desktop\\M3P-BackEnd-Squad2 - Copia\\Backend\\Backend\\Backend.csproj",
+      "projectPath": "C:\\Users\\djblabla\\Desktop\\FullStackEstreito\\Backend\\Backend.csproj",
       "packagesPath": "C:\\Users\\djblabla\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\djblabla\\Desktop\\M3P-BackEnd-Squad2 - Copia\\Backend\\Backend\\obj\\",
+      "outputPath": "C:\\Users\\djblabla\\Desktop\\FullStackEstreito\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\djblabla\\AppData\\Roaming\\NuGet\\NuGet.Config",

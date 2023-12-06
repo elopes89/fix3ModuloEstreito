@@ -12,10 +12,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using Backend.Service;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
 // builder.Services.AddControllers().AddJsonOptions(x =>
 //    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
 
@@ -33,6 +33,8 @@ builder.Services.AddControllers()
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IMalService, MailService>();
+
 
 //string connectionString = "Data Source=/Users/mariacarolinaboabaid/Downloads/Senai/LabSchoolContext.db;";
 
@@ -45,8 +47,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var Key = Encoding.ASCII.GetBytes(Backend.Service.Key.Secret);
 
-
 builder.Services.AddAuthentication(x =>
+
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -62,7 +64,7 @@ builder.Services.AddAuthentication(x =>
         ValidateAudience = false
     };
 });
-//Repositories
+//
 builder.Services.AddScoped<IAtendimentosRepository, AtendimentosRepository>();
 builder.Services.AddScoped<IAvaliacaoRepository, AvaliacaoRepository>();
 builder.Services.AddScoped<IExercicioRepository, ExercicioRepository>();
@@ -92,7 +94,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors(c =>{
+app.UseCors(c =>
+{
     c.AllowAnyHeader();
     c.AllowAnyMethod();
     c.AllowAnyOrigin();

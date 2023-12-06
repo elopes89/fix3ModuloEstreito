@@ -19,7 +19,7 @@ export class ListagemUsuariosComponent {
   pesquisa: string = ''
 
 
-  constructor(private listagemUsuariosService: ListagemUsuariosService, private route: Router) {}
+  constructor(private listagemUsuariosService: ListagemUsuariosService, private route: Router) { }
 
   ngOnInit() {
     this.gerarListaValores();
@@ -67,23 +67,21 @@ export class ListagemUsuariosComponent {
     }
   }
 
-  // Função para navegar para a página de edição de usuários
   redirecionarFormEditar(id: number | undefined) {
-    // this.route.navigate([`edit-monitoring/${id}`])
     this.route.navigate([`private/editar-usuario/${id}`])
   }
 
-  // Função para navegar para a página de detalhamento aluno
   redirecionarDetalhamento() {
     this.route.navigate([`/private/detalhamento-aluno`])
   }
 
-  // Método para deletar usuário
   deletarUsuario(idUsuario: number) {
     this.listagemUsuariosService.deleteUsuario(idUsuario)
       .subscribe(() => {
         alert("Deletado com sucesso!")
         this.gerarListaValores
+        this.gerarListaValores();
+
       },
         (error: any) => {
           console.error('Erro ao deletar usuário:', error);

@@ -17,7 +17,6 @@ export class FormEditarUsuarioComponent {
   enderecos: Array<IEndereco> = [];
   submitted = false;
   disBotao = this.frontService.atvBotao;
-  registerForm!: FormGroup;
   usuarios!: IUsuario;
   endId = 0;
   constructor(private formBuilder: FormBuilder, private frontService: FrontService,
@@ -25,23 +24,13 @@ export class FormEditarUsuarioComponent {
 
   }
 
-
-
-
-  OnSubmit() {
-    this.submitted = true;
-    if (this.registerForm.invalid) {
-      return;
-    } else {
-      this.router.navigate(['/'])
-    }
-  }
   ngOnInit(): void {
     const id = Number(this.active.snapshot.paramMap.get('id'))
-    this.frontService.idDetail = id;
     this.frontService.getId(id, `api/usuarios`, this.usuarios).subscribe(item => {
       this.usuarios = item;
-    })
+      this.frontService.atvBotao = true;
+      console.log(this.usuarios);
+    });
   }
 
 }

@@ -1,4 +1,3 @@
-
 <div class="container">
   <form [formGroup]="registerForm" class="form">
     <div class="form-floating mb-3">
@@ -7,6 +6,7 @@
         formControlName="cep"
         class="form-control"
         (change)="BuscaCep()"
+        placeholder="cep"
       />
       <label for="cep">CEP</label>
     </div>
@@ -56,6 +56,7 @@
         <label for="localidade">Localidade</label>
       </div>
     </div>
+
     <div class="form-floating mb-3">
       <input type="text" formControlName="numero" class="form-control" />
       <label for="numero">Número</label>
@@ -98,44 +99,51 @@
       </div>
       <div class="col-md">
         <div class="form-floating">
-          <label class="label-select" for="floatingInputValue">Tipo</label>
           <select class="form-select" formControlName="tipo">
             <option value="Administrador">Administrador</option>
             <option value="Pedagogo">Pedagogo</option>
             <option value="Professor">Professor</option>
             <option value="Aluno">Aluno</option>
           </select>
+          <label class="label-select" for="floatingInputValue">Tipo</label>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md">
-        <div class="form-floating">
-          <input
-            type="text"
-            class="form-control"
-            formControlName="cpf"
-            mask="000.000.000-00"
-            id="floatingInputValue"
-          />
-          <label for="floatingInputValue">CPF</label>
-        </div>
-      </div>
-      <div class="col-md">
-        <div class="form-floating">
-          <input
-            [ngClass]="{
-              'is-invalid':
-                submitted && registerForm.controls['telefone']?.errors
-            }"
-            type="text"
-            formControlName="telefone"
-            class="form-control"
-            mask="(00) 0 0000-0000"
-            id="floatingInputValue"
-          />
-          <label for="floatingInputValue">Telefone</label>
+    <div class="form-floating">
+      <input
+        type="text"
+        length="14"
+        class="form-control"
+        formControlName="cpf"
+        [mask]="telMask"
+        placeholder="kkk"
+      />
+      <label for="cpf">CPF</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        length="16"
+        [(ngModel)]="foneModel"
+        mask="(00) 0 0000-0000"
+        [ngClass]="{
+          'is-invalid': submitted && registerForm.controls?.['telefone']?.errors
+        }"
+        formControlName="telefone"
+        class="form-control"
+        placeholder="(00) 0 0000-0000"
+
+      />
+      <label for="telefone">Telefone</label>
+
+      <div
+        *ngIf="submitted && registerForm.controls?.['telefone']?.errors"
+        class="text-danger"
+      >
+        <div *ngIf="registerForm.controls?.['telefone']?.errors?.['required']">
+          O telefone é obrigatório!!
         </div>
       </div>
     </div>
@@ -153,8 +161,8 @@
         </div>
       </div>
 
-      <div class="col-md">
-        <div class="form-group">
+      <div class="form-group">
+        <div class="col-md">
           <label for="senha">Senha</label>
           <input
             type="password"
@@ -186,7 +194,7 @@
         <div class="col-md">
           <div class="form-floating">
             <input
-              type=number
+              type="number"
               formControlName="codigo_Registro_Professor"
               class="form-control"
               id="floatingInputValue"
@@ -221,11 +229,18 @@
         Ativo
       </label>
     </div>
-
-    <div class="div-btn" style="display: flex; justify-content:space-between;">
-          <button [disabled]="end" (click)="Editar()" class="btn btn-warning">EDITAR</button>
-        <button [disabled]="!end" (click)="OnSubmitUser()" class="btn btn-success">SALVAR</button>
-        <button [disabled]="end" (click)="Excluir()" class="btn btn-danger">EXCLUIR</button>
-    </div>
   </form>
+
+  <div class="div-btn" style="display: flex; justify-content: space-between">
+    <button [disabled]="!disBotao" class="btn btn-warning" (click)="Editar()">
+      EDITAR
+    </button>
+    <button
+      [disabled]="disBotao"
+      (click)="OnSubmitUser()"
+      class="btn btn-success"
+    >
+      SALVAR
+    </button>
+  </div>
 </div>
