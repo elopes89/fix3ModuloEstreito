@@ -16,7 +16,6 @@ namespace Backend.Controllers
     public class AvaliacaoController : ControllerBase
     {
 
-        // Injeção de dependência do repositório e mapper
         private readonly IAvaliacaoRepository _avaliacaoRepository;
         private readonly IMapper _mapper;
 
@@ -26,7 +25,6 @@ namespace Backend.Controllers
             _mapper = mapper;
         }
 
-        // Endpoints
         [HttpGet]
         public ActionResult<IEnumerable<AvaliacaoReadDTO>> GetAll()
         {
@@ -80,10 +78,8 @@ namespace Backend.Controllers
         {
             try
             {
-                // Mapeando para a model
                 var novaAvaliacao = _mapper.Map<Avaliacao>(avaliacaoCreateDTO);
 
-                // Validando os dados informados
                 var avaliacaoValidator = new AvaliacaoValidator();
                 var validatorResult = avaliacaoValidator.Validate(novaAvaliacao);
 
@@ -94,7 +90,6 @@ namespace Backend.Controllers
 
                 _avaliacaoRepository.Adicionar(novaAvaliacao);
 
-                // Mapeando o retorno para o ReadDTO
                 var novaAvaliacaoRead = _mapper.Map<AvaliacaoReadDTO>(novaAvaliacao);
 
                 return Created("Avaliacao criada com sucesso!", novaAvaliacaoRead);
@@ -119,10 +114,8 @@ namespace Backend.Controllers
                     return NotFound("Nenhum registro encontrado no banco de dados.");
                 }
 
-                // Mapeando para a model
                 avaliacao = _mapper.Map(avaliacaoUpdateDTO, avaliacao);
 
-                // Validando os dados informados
                 var avaliacaoValidator = new AvaliacaoValidator();
                 var validatorResult = avaliacaoValidator.Validate(avaliacao);
 
@@ -133,7 +126,6 @@ namespace Backend.Controllers
 
                 _avaliacaoRepository.Atualizar(avaliacao);
 
-                // Mapeando o retorno para o ReadDTO
                 var avaliacaoAtualizadaRead = _mapper.Map<AvaliacaoReadDTO>(avaliacao);
                 return Ok(new
                 {

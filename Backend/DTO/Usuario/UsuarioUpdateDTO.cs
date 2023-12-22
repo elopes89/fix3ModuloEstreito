@@ -17,7 +17,6 @@ namespace Backend.DTO.Usuario
         public string Matricula_Aluno { get; set; }
         public int Codigo_Registro_Professor { get; set; }
 
-        // Endereço
         public string CEP { get; set; }
         public string Localidade { get; set; }
         public string UF { get; set; }
@@ -26,7 +25,6 @@ namespace Backend.DTO.Usuario
         public string Complemento { get; set; }
         public string Bairro { get; set; }
 
-        // Empresa 
         public int Empresa_Id { get; set; }
     }
 }

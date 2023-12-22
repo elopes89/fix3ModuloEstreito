@@ -9,8 +9,9 @@ namespace Backend.DTO.Log
     {
         public int Id { get; set; }
         public int Usuario_Id { get; set; }
-        public string Acao { get; set; }  
-        public DateTime Data { get; set; }
-        public string Detalhes { get; set; }
+        public string Tipo { get; set; }
+        public string Nome { get; set; }
+        public string Acao { get; set; }
+        public string Data { get; set; }
     }
 }

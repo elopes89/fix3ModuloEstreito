@@ -22,11 +22,9 @@ namespace Backend.Models
         [Required]
         public int Pedagogo_Id { get; set; }
 
-         // Relacionamentos
         [ForeignKey("Aluno_Id")]
         public virtual Usuario Aluno { get; set; }
 
-        // Define another foreign key property explicitly
         [ForeignKey("Pedagogo_Id")]
         public virtual Usuario Pedagogo { get; set; }
     }

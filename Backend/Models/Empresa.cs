@@ -25,7 +25,6 @@ namespace Backend.Models
         [Column(TypeName = "VARCHAR"), StringLength(50)]
         public string Demais_Infos { get; set; }
 
-        // Relacionamento com UsuarioModel
         public virtual IList<Usuario> Usuarios { get; set; }
        
     }

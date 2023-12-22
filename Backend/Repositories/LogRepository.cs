@@ -10,7 +10,6 @@ namespace Backend.Repositories
 {
     public class LogRepository : ILogRepository
     {
-        // Injeção de dependência do banco de dados
         private readonly LabSchoolContext _context;
 
         public LogRepository(LabSchoolContext context)
@@ -25,7 +24,6 @@ namespace Backend.Repositories
             _context.SaveChanges();
         }
 
-        // Obter todos
         public List<Log>? ObterTodos()
         {
             return  _context.Logs.ToList();

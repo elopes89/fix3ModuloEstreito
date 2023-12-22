@@ -29,7 +29,6 @@ namespace Backend.Models
         [Required]
         public int Aluno_Id { get; set; }
 
-        // Relacionamentos
         [ForeignKey("Aluno_Id")]
         public virtual Usuario Aluno { get; set; }
 

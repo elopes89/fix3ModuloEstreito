@@ -56,21 +56,13 @@ namespace Backend.Controllers
         {
             try
             {
-                // Mapeando para a model
                 var novoLog = _mapper.Map<Log>(logCreateDTO);
-
-                // Validando os dados informados
-                var logValidator = new LogValidator();
-                var validatorResult = logValidator.Validate(novoLog);
-
-                if (validatorResult.IsValid == false)
+                if (novoLog == null)
                 {
-                    return StatusCode(StatusCodes.Status400BadRequest, validatorResult.Errors);
+                    return StatusCode(StatusCodes.Status400BadRequest);
                 }
-
                 _logRepository.Adicionar(novoLog);
 
-                // Mapeando o retorno para o ReadDTO
                 var novoLogRead = _mapper.Map<LogReadDTO>(novoLog);
 
                 return StatusCode(HttpStatusCode.Created.GetHashCode(), novoLogRead);
