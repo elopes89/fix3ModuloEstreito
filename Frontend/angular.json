@@ -100,6 +100,39 @@
           }
         }
       }
+    },
+    "ngx-toggle": {
+      "projectType": "library",
+      "root": "projects/ngx-toggle",
+      "sourceRoot": "projects/ngx-toggle/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-toggle/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-toggle/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-toggle/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngx-toggle/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

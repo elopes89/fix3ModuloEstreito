@@ -1,22 +1,22 @@
 name: CI
-
-on: pull_request
-
+on:
+  pull_request:
+    branches:
+      - main
 jobs:
   ci:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout ✅
         uses: actions/checkout@v2
-      - name: Setup
+      - name: Setup 🏗
         uses: actions/setup-node@v2
         with:
-          node-version: 18.x
+          node-version: lts/*
           cache: 'npm'
       - name: Install ⚙️
         run: npm ci
       - name: Build 🛠
         run: npm run build:ci
-      - name: Test
+      - name: Test 📋
         run: npm run test:ci
