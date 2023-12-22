@@ -30,3 +30,26 @@ export class ToolbarComponent {
       })
   }
 }
+
+// name: CI
+// on:
+//   pull_request:
+//     branches:
+//       - main
+// jobs:
+//   ci:
+//     runs-on: ubuntu-latest
+//     steps:
+//       - name: Checkout ✅
+//         uses: actions/checkout@v2
+//       - name: Setup 🏗
+//         uses: actions/setup-node@v2
+//         with:
+//           node-version: lts/*
+//           cache: 'npm'
+//       - name: Install ⚙️
+//         run: npm ci
+//       - name: Build 🛠
+//         run: npm run build:ci
+//       - name: Test 📋
+//         run: npm run test:ci
