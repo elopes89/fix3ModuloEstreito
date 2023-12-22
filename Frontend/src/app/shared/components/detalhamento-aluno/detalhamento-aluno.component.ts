@@ -15,6 +15,8 @@ export class DetalhamentoAlunoComponent {
   avaliacoes: any[] = []
   exercicios: any[] = []
   aluno_id: number = 1
+  
+  permissao = sessionStorage.getItem('userTipo');
 
   constructor(private detalhamentoAlunoService: DetalhamentoAlunoService, private route: Router) { }
 
@@ -29,7 +31,7 @@ export class DetalhamentoAlunoComponent {
         if (this.aluno.complemento == undefined) {
           this.aluno.complemento = "-"
         }
-        
+
       });
 
       this.getAtendimento();
@@ -38,7 +40,6 @@ export class DetalhamentoAlunoComponent {
   }
 
 
-  // Métodos atendimentos
   getAtendimento() {
     this.detalhamentoAlunoService.getAtendimentos()
       .subscribe((result) => {
@@ -62,7 +63,6 @@ export class DetalhamentoAlunoComponent {
     this.route.navigate([`/private/editar-atendimento/${idAtendimento}`])
   }
 
-  // Métodos avaliações
   getAvaliacoes() {
     this.detalhamentoAlunoService.getAvaliacoes()
       .subscribe((result) => {
@@ -86,7 +86,6 @@ export class DetalhamentoAlunoComponent {
     this.route.navigate([`/private/dashboard`])
   }
 
-  // Métodos exercícios
   getExercicios() {
     this.detalhamentoAlunoService.getExercicios()
       .subscribe((result) => {

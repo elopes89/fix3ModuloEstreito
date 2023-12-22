@@ -28,7 +28,7 @@
         <div class="form-floating">
           <input
             [ngClass]="{
-              'is-invalid': submitted && registerForm.controls['email']?.errors
+              'is-invalid': submitted && registerForm.controls['senha']?.errors
             }"
             type="text"
             formControlName="senha"
@@ -45,7 +45,6 @@
     </form>
 
     <div id="container-button">
-      <!-- Botão modal cadastrar conta -->
       <button
         type="button"
         class="btn btn-link"
@@ -55,13 +54,13 @@
         Cadastrar conta
       </button>
 
-      <!-- Botão resetar senha -->
-      <button type="button" class="btn btn-link">Esqueci minha senha</button>
+      <button routerLink="/reset" type="button" class="btn btn-link">
+        Esqueci minha senha
+      </button>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
 <div
   class="modal fade"
   id="exampleModal"

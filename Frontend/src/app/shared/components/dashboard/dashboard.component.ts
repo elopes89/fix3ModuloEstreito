@@ -30,7 +30,6 @@ export class DashboardComponent {
 
 
   ngOnInit() {
-
     this.dashboardService.getAlunos()
       .subscribe((data) => {
         this.quantidadeAlunos = data.length

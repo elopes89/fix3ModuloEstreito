@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { EmpresaService } from '../../services/empresa.service';
 import { DetalhamentoAlunoService } from '../../services/detalhamento-aluno.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,29 +12,21 @@ export class ToolbarComponent {
 
   nomeEmpresa: string = ''
   logo: string = ''
-  usuario: string = ''
+  usuaris = sessionStorage.getItem('userNome');
 
-  constructor(private empresaService: EmpresaService,
-    private userService: DetalhamentoAlunoService) {}
+  constructor(private empresaService: EmpresaService, private ac: ActivatedRoute,
+    private userService: DetalhamentoAlunoService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.getDadosEmpresa();
-    this.getDadosUser();
-  } 
+  }
 
-  getDadosEmpresa()
-  {
-    this.empresaService.getEmpresa(1)
+  getDadosEmpresa() {
+    const id = Number(this.ac.snapshot.paramMap.get('id'));
+    this.empresaService.getEmpresa(id)
       .subscribe((result) => {
         this.nomeEmpresa = result.nome_Empresa
         this.logo = result.logotipo_URL
       })
-  }
-
-  getDadosUser(){
-    this.userService.getAluno(1)
-    .subscribe((result) => {
-      this.usuario = result.nome
-    })
   }
 }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FrontService } from '../../services/front.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 
-export class MenuComponent  {
+export class MenuComponent {
 
-  constructor(private route: Router) {}
+  constructor(private route: Router, private fr: FrontService) { }
 
   menuaberto = false;
 
@@ -17,11 +18,13 @@ export class MenuComponent  {
     this.menuaberto = !this.menuaberto
   }
 
-  LogOut(){
+  LogOut() {
     sessionStorage.removeItem('userTipo');
     sessionStorage.removeItem('userNome');
     sessionStorage.removeItem('userId');
     sessionStorage.removeItem('token');
+    this.fr.SalvarLog("saiu do sistema")
+    this.fr.addLog();
     this.route.navigate([('/')]);
   }
 

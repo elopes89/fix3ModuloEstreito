@@ -174,6 +174,7 @@ public class UsuarioController : ControllerBase
         }
     }
 
+    // public ActionResult<UsuarioReadDTO> Put(int id, [FromBody] UsuarioUpdateDTO usuarioUpdateDTO)
     [HttpPut("/resetar")]
     public ActionResult PutSenha([FromBody] ResetarSenhaDTO email)
     {
@@ -185,7 +186,7 @@ public class UsuarioController : ControllerBase
             {
                 return Unauthorized("Nenhum registro encontrado no banco de dados.");
             }
-
+                usuario.Senha = email.Senha;
             _usuarioRepository.ResetarSenha(usuario);
 
             return Ok("Senha resetada!");

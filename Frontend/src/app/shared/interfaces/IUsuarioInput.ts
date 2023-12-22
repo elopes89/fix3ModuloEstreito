@@ -1,17 +1,21 @@
-import { IEndereco } from "./IEndereco";
-import { IEnderecoInput } from "./IEnderecoInput";
-
 export interface IUsuarioInput {
-  nome: string;
-  cpf: string;
-  tipo: string;
-  email: string;
-  telefone: string;
-  genero: string;
-  senha: string;
-  status_sistema: boolean;
-  matricula_Aluno: string;
-  codigo_Registro_Professor: number;
-  empresa_Id: number;
-  Endereco: IEndereco;
+
+  nome: string,
+  genero: string,
+  cpf: string,
+  telefone: string,
+  email: string,
+  senha: string,
+  tipo: string,
+  status_sistema: boolean,
+  matricula_Aluno?: string,
+  codigo_Registro_Professor?: number,
+  cep: string,
+  uf: string,
+  logradouro: string,
+  localidade: string,
+  numero: string,
+  complemento: string,
+  bairro: string,
+  empresa_Id: number
 }

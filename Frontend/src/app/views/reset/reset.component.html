@@ -1,0 +1,35 @@
+<h1>Recuperar Senha</h1>
+
+<form [formGroup]="formLima" class="form">
+  <div class="form-floating">
+    <div formArrayName="emails">
+      <div *ngFor="let course of emails.controls; index as i">
+        <input
+          [formControlName]="i"
+          [(ngModel)]="email"
+          placeholder="Email de Recuperação"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="onSubmit()">Enviar Email</button>
+  </div>
+</form>
+
+<br />
+<br />
+<label>Código Enviado</label>
+<input type="number" class="form-control" [(ngModel)]="codigoEnviado" />
+<button class="btn btn-warning" (click)="ConfirmarCodigo()">
+  Confirmar Código
+</button>
+<br />
+<br />
+<div *ngIf="testeCode == true">
+  <form [formGroup]="formReset" class="form">
+    <div class="form-floating">
+      <input type="text" class="form-control" formControlName="senha" />
+    </div>
+  </form>
+  <button class="btn btn-success" (click)="OnReset()">Reset</button>
+</div>

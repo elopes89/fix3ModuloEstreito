@@ -11,13 +11,17 @@ import { NotFoundComponent } from './shared/components/not-found/not-found.compo
 import { PublicModule } from './views/public/public.module';
 import { PrivateModule } from './views/private/private.module';
 import { LogsComponent } from './shared/components/logs/logs.component';
+import { ResetComponent } from './views/reset/reset.component';
+import { EditarEmpresaComponent } from './shared/components/editar-empresa/editar-empresa.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
     LogsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ResetComponent,
+    EditarEmpresaComponent
   ],
   imports: [
     BrowserModule,

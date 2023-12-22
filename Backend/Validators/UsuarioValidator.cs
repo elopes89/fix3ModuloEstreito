@@ -27,13 +27,13 @@ namespace Backend.Validators
             RuleFor(x => x.CPF).NotEmpty()
                 .NotNull()
                 .WithMessage("O campo CPF possui preenchimento obrigatório.")
-                .Must(Valida_CPF)
+                // .Must(Valida_CPF)
                 .WithMessage("O campo CPF deve possuir o seguinte formato: 000.000.000-00");
 
             RuleFor(x => x.Telefone).NotEmpty()
                 .NotNull()
+                // .Must(Valida_Telefone)
                 .WithMessage("O campo TELEFONE possui preenchimento obrigatório.")
-                .Must(Valida_Telefone)
                 .WithMessage("O campo TELEFONE deve possuir o seguinte formato: (99) 9 9999-9999"); ;
 
             RuleFor(x => x.Email).NotEmpty()
@@ -114,13 +114,9 @@ namespace Backend.Validators
             }
         }
 
-        // Método para validar formato telefone
         private bool Valida_Telefone(string telefone)
         {
-            // Define uma expressão regular para validar o formato "(99) 9 9999-9999"
             string pattern = @"\(\d{2}\) 9 \d{4}-\d{4}";
-
-            // Use Regex.IsMatch para verificar se o número de telefone corresponde ao padrão
             return Regex.IsMatch(telefone, pattern);
         }
 

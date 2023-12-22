@@ -1,21 +1,27 @@
 body {
-  position: relative;
+  position:absolute;
 }
 
 .sidenav {
-  position: fixed;
+  max-width: 200px;
+  margin-right: 0px;
+  padding-right: 0px;
+  position: relative;
   top: 62px;
-  background-color: white;
-  transition: all 2.5s auto; 
+  background-color: green;
+  transition: all 2.5s auto;
   z-index: 100;
   min-height: 92vh;
-  width: 100px;
+  width: 80px;
   box-shadow: 8px 20px 12px 3px rgba(215, 222, 227, 0.39);
 }
 
 .sidenav-aberto {
-  width: 250px;
+  width: 200px;
   box-shadow: none;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 0px;
 }
 
 .sidenav-aberto-button {
@@ -24,7 +30,7 @@ body {
   padding-left: 23px;
 }
 
- 
+
 .img-toggler {
   margin: 0px;
 }

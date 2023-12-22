@@ -3,10 +3,9 @@
     position: fixed;
     height: 62px;
     width: 100vw;
-    background-color: white;
+    background-color: yellow;
     z-index: 2;
     box-shadow: 18px 1px 12px 3px rgba(215, 222, 227, 0.39);
-
 }
 
 .toolbar-container {

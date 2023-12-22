@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IAtendimento } from '../../interfaces/IAtendimento';
 import { ListagemUsuariosService } from '../../services/listagem-usuarios.service';
 import { FrontService } from '../../services/front.service';
+import { IUsuario } from '../../interfaces/IUsuario';
+import { serviceAtendimento } from '../../services/serviceAtendimento';
 
 @Component({
   selector: 'app-form-editar-atendimento',
@@ -13,71 +15,40 @@ import { FrontService } from '../../services/front.service';
 export class FormEditarAtendimentoComponent implements OnInit {
 
   modoEdicao = false;
-  atendimentoEdicao?: IAtendimento;
-  atendimentoData: IAtendimento[] = [];
+  atendimentoEdicao!: IAtendimento;
   editarAtendimentoForm!: FormGroup;
   serviceAtedimento: any;
   route: any;
   serviceAtendimento: any;
+  alunos: Array<string> = [];
+  pedagogos: Array<string> = [];
+  usuarios: Array<IUsuario> = [];
+  constructor(private sa: serviceAtendimento, private active: ActivatedRoute, private frontService: FrontService, private router: Router) {
+    this.Buscar();
 
+  }
 
-  constructor(private formBuilder: FormBuilder, private frontService: FrontService, private router: Router) {
+  Buscar() {
+    this.frontService.getAll("ListarUsuarios", this.usuarios).subscribe(user => {
+      this.usuarios = user;
+      for (let i = 0; i < this.usuarios.length; i++) {
+        if (this.usuarios[i].tipo == 'Aluno') {
+          this.alunos.push(this.usuarios[i].nome)
+        }
 
-    const newLocal = this;
-    newLocal.editarAtendimentoForm = new FormGroup({
-      'id': new FormGroup('', [Validators.required]),
-      'descricao': new FormControl('', [Validators.required]),
-      'data': new FormControl('', [Validators.required]),
-      'id_Aluno': new FormControl('', [Validators.required]),
-      'id_Pedagogo': new FormControl('', [Validators.required]),
+        if (this.usuarios[i].tipo == 'Pedagogo') {
+          this.pedagogos.push(this.usuarios[i].nome)
+        }
+      }
+      console.log(this.alunos + " " + this.pedagogos)
     });
   }
 
-  // Validador personalizado para permitir que o campo "finalizado" seja opcional
-  private requiredTrueOrNull(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const value = control.value;
-      if (value === true || value === false || value === null) {
-        return null; // Válido quando for true, false ou null (opcional)
-      }
-      return { 'required': { value } }; // Inválido quando diferente de true, false ou null
-    };
-  }
-
   async ngOnInit() {
-    this.atendimentoEdicao = await this.serviceAtendimento.obterAtendimentoPorId();
-    this._preencherCamposFormularioEdicao();
-  }
-
-  private _preencherCamposFormularioEdicao() {
-    this.editarAtendimentoForm.get('id')?.setValue(this.atendimentoEdicao?.id);
-    this.editarAtendimentoForm.get('id_Aluno')?.setValue(this.atendimentoEdicao?.aluno_id);
-    this.editarAtendimentoForm.get('descricao')?.setValue(this.atendimentoEdicao?.descricao);
-    this.editarAtendimentoForm.get('data')?.setValue(this.atendimentoEdicao?.data);
-    this.editarAtendimentoForm.get('id_Pedagogo')?.setValue(this.atendimentoEdicao?.pedagogo_id);
-  }
-
-  async onSubmit() {
-    const atendimento = {
-      id: this.editarAtendimentoForm.get('id')?.value,
-      aluno_id: this.editarAtendimentoForm.get('id_Aluno')?.value,
-      descricao: this.editarAtendimentoForm.get('descricao')?.value,
-      data: this.editarAtendimentoForm.get('data')?.value,
-      pedagogo_id: this.editarAtendimentoForm.get('id_Pedagogo')?.value,
-    };
-
-
-    if (this.modoEdicao) {
-      const atendimento = {
-        id: this.atendimentoEdicao ? this.atendimentoEdicao.id : null,
-      };
-      await this.serviceAtendimento.editar(atendimento);
-    } else {
-      await this.serviceAtendimento.cadastrar(atendimento);
-    }
-    this.router.navigate(['/privado/pedagogicos']);
-
-    //  validarMensagemDeErro(field: string) {
-    //    return this.editarAtendimentoForm.get(field)?.invalid && this.editarAtendimentoForm.get(field)?.touched;
+    const id = Number(this.active.snapshot.paramMap.get('id'))
+    this.sa.obterAtendimentoPorId(id).subscribe(item => {
+      this.atendimentoEdicao = item;
+      this.frontService.atvBotao = true;
+    });
   }
 }

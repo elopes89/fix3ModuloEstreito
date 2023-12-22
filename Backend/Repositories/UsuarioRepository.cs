@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Backend.Context;
+using Backend.DTO.Usuario;
 using Backend.Models;
 using Backend.Repositories.Interfaces;
 
@@ -83,7 +84,8 @@ public class UsuarioRepository : IUsuarioRepository
     // Resetar senha
     public void ResetarSenha(Usuario usuario)
     {
-        usuario.Senha = "0000";
+        var reset = new ResetarSenhaDTO();
+        // usuario.Senha = reset.Senha;
         _context.Usuarios.Update(usuario);
         _context.SaveChanges();
     }
@@ -112,58 +114,5 @@ public class UsuarioRepository : IUsuarioRepository
     }
 
 }
-
-
-
-// public Usuario Resetar(string email, ResetarSenhaInput senha)
-// {
-//     var testeEmail = _context.Usuarios.FirstOrDefault(x => x.Email.Equals(email));
-//     _context.Usuarios?.Remove(testeEmail);
-//     testeEmail.Senha = senha.Senha;
-//     _context.Usuarios?.Update(testeEmail);
-//     SalvarLogs("Resetar Senha", idUsuario);
-//     _context.SaveChanges();
-//     return testeEmail;
-// }
-
-
-// public void Atualizar(int id, UsuarioCompleto users)
-// {
-//     var usuario = _context.UsuarioCompleto.Where(w => w.Id == id).FirstOrDefault();
-//     _context.UsuarioCompleto?.Remove(usuario);
-//     users.Id = id;
-//     _context.UsuarioCompleto?.Update(users);
-//     _context.SaveChanges();
-// }
-
-
-
-// public void Excluir(int id)
-// {
-//     var user = ObterPorId(id);
-//     if (user != null)
-//     {
-//         _context?.Usuarios?.Remove(user);
-//         SalvarLogs("Excluir usuário por id", user.Id);
-//         _context?.SaveChanges();
-//     }
-// }
-
-
-// var testeEmail = _context.UsuarioCompleto.FirstOrDefault(x => x.Email.Equals(login.Email));
-// var testeSenha = _context.UsuarioCompleto.FirstOrDefault(x => x.Senha.Equals(login.Senha));
-
-// if (testeEmail != null && testeSenha != null)
-// {
-//     _context.Logins.Add(login);
-//     _context.SaveChanges();
-//     SalvarLogs("Logar", testeEmail.Id);
-//     return true;
-// }
-
-
-
-
-
 
 

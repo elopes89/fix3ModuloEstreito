@@ -1,104 +1,134 @@
-<div class="container">
-
-    <!-- Título da página -->
-    <h1 class="container-title">
-        Cadastrar exercício
-    </h1>
+<div *ngIf="permissao === 'Administrador' || 'Professor'">
+  <div class="container">
+    <h1 class="container-title">Cadastrar exercício</h1>
 
     <form class="form" [formGroup]="registrarForm" #form="ngForm">
-        <!-- Alunos -->
-        <div class="form-floating mb-3">
-            <select class="form-select" formControlName="aluno" name="aluno" id="aluno">
-                <option selected>Selecione</option>
-                <option *ngFor="let aluno of alunos" [value]="aluno.id">
-                    {{aluno.nome}}
-                </option>
-            </select>
-            <label for="aluno">Aluno</label>
-            <span class="mensagem-erro" *ngIf="mensagemErroSelect('aluno')">
-                A seleção de um aluno é obrigatório
-            </span>
-        </div>
+      <div class="form-floating mb-3">
+        <select
+          class="form-select"
+          formControlName="aluno"
+          name="aluno"
+          id="aluno"
+        >
+          <option selected>Selecione</option>
+          <option *ngFor="let aluno of alunos" [value]="aluno.id">
+            {{ aluno.nome }}
+          </option>
+        </select>
+        <label for="aluno">Aluno</label>
+        <span class="mensagem-erro" *ngIf="mensagemErroSelect('aluno')">
+          A seleção de um aluno é obrigatório
+        </span>
+      </div>
 
-        <!-- Professores -->
-        <div class="form-floating mb-3">
-            <select class="form-select" formControlName="professor" name="professor" id="professor">
-                <option selected>Selecione</option>
-                <option *ngFor="let professor of professores" [value]="professor.id">
-                    {{professor.nome}}
-                </option>
-            </select>
-            <label for="aluno">Prrofessor</label>
-            <span class="mensagem-erro" *ngIf="mensagemErroSelect('professor')">
-                A seleção de um professor é obrigatório
-            </span>
-        </div>
+      <div class="form-floating mb-3">
+        <select
+          class="form-select"
+          formControlName="professor"
+          name="professor"
+          id="professor"
+        >
+          <option selected>Selecione</option>
+          <option *ngFor="let professor of professores" [value]="professor.id">
+            {{ professor.nome }}
+          </option>
+        </select>
+        <label for="professor">Professor</label>
+        <span class="mensagem-erro" *ngIf="mensagemErroSelect('professor')">
+          A seleção de um professor é obrigatório
+        </span>
+      </div>
 
-        <div class="row">
-            <!-- Descrição -->
-            <div class="col-md">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="descricao" name="descricao"
-                        formControlName="descricao" />
-                    <label for="descricao">Descrição</label>
-                    <span class="mensagem-erro" *ngIf="mensagemErro('descricao')">
-                        O campo descrição possui preenchimento obrigatório
-                    </span>
-                    <span class="mensagem-erro" *ngIf="mensagemErroTamanho('descricao', 255, 15)">
-                        Campo com mínimo de 15 caracteres e máximo de 255 caracters
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Título -->
+      <div class="row">
         <div class="col-md">
-            <div class="form-floating">
-                <input type="text" class="form-control" id="titulo" name="titulo" formControlName="titulo" />
-                <label for="titulo">Título</label>
-                <span class="mensagem-erro" *ngIf="mensagemErro('titulo')">
-                    O campo título possui preenchimento obrigatório
-                </span>
-                <span class="mensagem-erro" *ngIf="mensagemErroTamanho('titulo', 64, 8)">
-                    Campo com mínimo de 8 caracteres e máximo de 255 caracters
-                </span>
-            </div>
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="descricao"
+              name="descricao"
+              formControlName="descricao"
+            />
+            <label for="descricao">Descrição</label>
+            <span class="mensagem-erro" *ngIf="mensagemErro('descricao')">
+              O campo descrição possui preenchimento obrigatório
+            </span>
+            <span
+              class="mensagem-erro"
+              *ngIf="mensagemErroTamanho('descricao', 255, 15)"
+            >
+              Campo com mínimo de 15 caracteres e máximo de 255 caracters
+            </span>
+          </div>
         </div>
+      </div>
 
-        <div class="row">
-            <!-- Materia -->
-            <div class="col-md">
-                <div class="form-floating">
-                    <input type="text" class="form-control" id="materia" name="materia" formControlName="materia" />
-                    <label for="materia">Matéria</label>
-                    <span class="mensagem-erro" *ngIf="mensagemErro('materia')">
-                        O campo matéria possui preenchimento obrigatório
-                    </span>
-                </div>
-            </div>
-            <!-- Data -->
-            <div class="col-md">
-                <div class="form-floating">
-                    <input type="date" class="form-control"
-                    id="data"
-                    name="data"
-                    formControlName="data">
-                    <label for="data">Data</label>
-                    <span class="mensagem-erro" *ngIf="mensagemErro('data')">
-                        O campo data possui preenchimento obrigatório
-                    </span>
-                    
-                </div>
-            </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="titulo"
+            name="titulo"
+            formControlName="titulo"
+          />
+          <label for="titulo">Título</label>
+          <span class="mensagem-erro" *ngIf="mensagemErro('titulo')">
+            O campo título possui preenchimento obrigatório
+          </span>
+          <span
+            class="mensagem-erro"
+            *ngIf="mensagemErroTamanho('titulo', 64, 8)"
+          >
+            Campo com mínimo de 8 caracteres e máximo de 255 caracters
+          </span>
         </div>
+      </div>
 
-        <!-- Submit  -->
-        <div class="div-btn">
-            <button id="btn-salvar"
-            type="submit"
-            (click)="criarExercicio()" 
-            class="btn btn-success d-grid w-100"
-            [disabled]="this.form.form.invalid">Salvar</button>
+      <div class="row">
+        <div class="col-md">
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="materia"
+              name="materia"
+              formControlName="materia"
+            />
+            <label for="materia">Matéria</label>
+            <span class="mensagem-erro" *ngIf="mensagemErro('materia')">
+              O campo matéria possui preenchimento obrigatório
+            </span>
+          </div>
         </div>
+        <div class="col-md">
+          <div class="form-floating">
+            <input
+              type="date"
+              class="form-control"
+              id="data"
+              name="data"
+              formControlName="data"
+            />
+            <label for="data">Data</label>
+            <span class="mensagem-erro" *ngIf="mensagemErro('data')">
+              O campo data possui preenchimento obrigatório
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="div-btn">
+        <button
+          id="btn-salvar"
+          type="submit"
+          (click)="criarExercicio()"
+          class="btn btn-success d-grid w-100"
+          [disabled]="this.form.form.invalid"
+        >
+          Salvar
+        </button>
+      </div>
     </form>
+  </div>
 </div>

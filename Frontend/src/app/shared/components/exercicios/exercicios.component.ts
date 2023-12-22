@@ -13,6 +13,7 @@ export class ExerciciosComponent {
   exercicios: any[] = []
   exerciciosOriginal: any[] = []
   pesquisa: string = ''
+  permissao = sessionStorage.getItem('userTipo');
 
   constructor(private service: DetalhamentoAlunoService, private route: Router) { }
 

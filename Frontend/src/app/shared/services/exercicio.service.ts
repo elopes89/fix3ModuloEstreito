@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { IExercicio } from '../interfaces/IExercicio';
 import { IUsuario } from '../interfaces/IUsuario';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ExercicioService {
     return this.httpClient.get<IExercicio[]>(`${environment.apiBack}/api/exercicios`)
   }
 
-  getExercicio(id: number){
+  getExercicio(id: number):Observable<IExercicio>{
     return this.httpClient.get<IExercicio>(`${environment.apiBack}/api/exercicios/${id}`)
   }
 
@@ -35,7 +36,7 @@ export class ExercicioService {
     return this.httpClient.post(`${environment.apiBack}/api/exercicios`, novoExercicio)
   }
 
-  updateExercicio(id: number, data: IExercicio){
+  updateExercicio(id: number, data: Object){
     return this.httpClient.put(`${environment.apiBack}/api/exercicios/${id}`, data)
   }
 }

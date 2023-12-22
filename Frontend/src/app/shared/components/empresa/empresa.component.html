@@ -1,73 +1,115 @@
 <div class="container">
+  <button class="btn btn-success" (click)="showForm()">
+    ADD New Enterprise
+  </button>
+  <div *ngIf="showHide == true">
+    <form class="form" [formGroup]="registerForm" #form="ngForm">
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="nome"
+          name="nome"
+          formControlName="nome"
+        />
+        <label for="nome">Nome</label>
+        <span class="mensagem-erro" *ngIf="mensagemErro('nome')">
+          Nome empresa é obrigatório
+        </span>
+      </div>
 
-    <!-- Título da página -->
-    <h1 class="container-title">
-        Editar empresa
-    </h1>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="slogan"
+          name="slogan"
+          formControlName="slogan"
+        />
+        <label for="slogan">Slogan</label>
+        <span class="mensagem-erro" *ngIf="mensagemErro('slogan')">
+          Slogan é obrigatório
+        </span>
+      </div>
 
-    <!-- Formulário -->
-    <form class="form" [formGroup]="editarForm" #form="ngForm">
+      <div class="form-floating">
+        <input
+          type="color"
+          class="form-control"
+          id="cores"
+          name="cores"
+          formControlName="cores"
+        />
+        <label for="cores">Cores</label>
+      </div>
 
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="logo"
+          name="logo"
+          formControlName="logo"
+        />
+        <label for="logo">Logo</label>
+      </div>
 
-        <div class="form-floating">
-            <input type="text" class="form-control" id="nome" name="nome" formControlName="nome">
-            <label for="nome">Nome</label>
-            <span class="mensagem-erro" *ngIf="mensagemErro('nome')">
-                Nome empresa é obrigatório
-            </span>
-        </div>
+      <div class="form-floating">
+        <textarea
+          class="form-control"
+          id="info"
+          name="info"
+          formControlName="info"
+          style="height: 100px"
+        ></textarea>
+        <label for="info">Outras informações</label>
+      </div>
 
-        <div class="form-floating">
-            <input type="text" 
-            class="form-control" 
-            id="slogan"
-            name="slogan"
-            formControlName="slogan">
-            <label for="slogan">Slogan</label>
-            <span class="mensagem-erro" *ngIf="mensagemErro('slogan')">
-                Slogan é obrigatório
-            </span>
-        </div>
-
-        <div class="form-floating">
-            <input type="text" 
-            class="form-control" 
-            id="cores"
-            name="cores"
-            formControlName="cores">
-            <label for="cores">Cores</label>
-        </div>
-
-        <div class="form-floating">
-            <input type="text" 
-            class="form-control" 
-            id="logo"
-            name="logo"
-            formControlName="logo">
-            <label for="logo">Logo</label>
-        </div>
-
-        <div class="form-floating">
-            <textarea 
-            class="form-control" 
-            id="info" 
-            name="info"
-            formControlName="info"
-            style="height: 100px"></textarea>
-            <label for="info">Outras informações</label>
-        </div>
-
-        <!-- Botão submit -->
-        <div class="div-btn">
-            <button 
-            id="btn-salvar" 
-            type="submit" 
-            class="btn btn-success d-grid w-100"
-            [disabled]="this.form.form.invalid"
-            (click)="editarEmpresa()">
-                Salvar alterações
-            </button>
-        </div>
-
+      <div class="div-btn">
+        <button
+          id="btn-salvar"
+          type="submit"
+          class="btn btn-success d-grid w-100"
+          [disabled]="this.form.form.invalid"
+          (click)="SalvarEmpresa()"
+        >
+          Salvar Nova Empresa
+        </button>
+      </div>
     </form>
+  </div>
+
+  <div class="container-cards">
+    <div class="container-cards-user-card" *ngFor="let user of listaEmpresas">
+      <img
+        style="width: 30px"
+        src="../../../../assets/dashboard/person.svg"
+        alt="Ícone representando usuário"
+      />
+      <h5 class="container-cards-user-card-name">
+        {{ user.nome_Empresa }}
+      </h5>
+      <p class="container-cards-user-card-info">
+        {{ user.id }}
+      </p>
+      <p class="container-cards-user-card-info">
+        {{ user.logotipo_URL }}
+      </p>
+      <p class="container-cards-user-card-info">
+        {{ user.paleta_Cores }}
+      </p>
+      <div class="container-cards-user-card-ctn-button">
+        <button
+          (click)="redirecionarFormEditar(user.id)"
+          class="container-cards-user-ctn-button-editar"
+        >
+          Editar
+          <img
+            src="../../../../assets/dashboard/pencil.svg"
+            style="height: 13px"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,9 +1,11 @@
-<h1>logs</h1>
-<div *ngIf="logs">
-  <div *ngFor="let l of logs">
-    <p>
-      O usuário de Id: {{ l.usuario }} {{ l.acao }} na Data:
-      {{ l.data }}
-    </p>
+<h1>LOGS</h1>
+<div *ngIf="permissao == 'Administrador'">
+  <div *ngIf="logs">
+    <div *ngFor="let l of logs">
+      <p>
+        O {{ l.tipo }}: {{ l.nome }} {{ l.acao }} na Data:
+        {{ l.data }}
+      </p>
+    </div>
   </div>
 </div>
