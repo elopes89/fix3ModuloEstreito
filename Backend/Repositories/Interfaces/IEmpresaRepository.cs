@@ -8,5 +8,7 @@ namespace Backend.Repositories.Interfaces
         public Empresa? ObterPorId (int id);
         public void Adicionar (Empresa empresa);
         public void Atualizar(Empresa empresa);
+        public List<Empresa>? Obter();
+
     }
 }

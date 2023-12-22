@@ -12,7 +12,6 @@ namespace Backend.Controllers
     [Route("api/whitelabel")]
     public class EmpresaController : ControllerBase
     {
-        // Injeção de dependência do repositório e mapper
         private readonly IMapper _mapper;
         private readonly IEmpresaRepository _empresaRepository;
 
@@ -22,7 +21,15 @@ namespace Backend.Controllers
             _mapper = mapper;
         }
 
-        // Endpoints       
+        [HttpGet]
+        public IActionResult Show()
+        {
+            var enterprises = _empresaRepository.Obter();
+            if (enterprises != null)
+                return Ok(enterprises.ToList());
+            else
+                return BadRequest();
+        }
         [HttpGet("{id}")]
         public ActionResult<EmpresaReadDTO> GetById(int id)
         {
@@ -51,10 +58,8 @@ namespace Backend.Controllers
         {
             try
             {
-                // Mapeando para a model
                 var novaEmpresa = _mapper.Map<Empresa>(empresaCreateDTO);
 
-                // Validando os dados informados
                 var empresaValidator = new EmpresaValidator();
                 var validatorResult = empresaValidator.Validate(novaEmpresa);
 
@@ -65,7 +70,6 @@ namespace Backend.Controllers
 
                 _empresaRepository.Adicionar(novaEmpresa);
 
-                // Mapeando o retorno para o ReadDTO
                 var novaEmpresaRead = _mapper.Map<EmpresaReadDTO>(novaEmpresa);
 
                 return Created("Empresa criada com sucesso!", novaEmpresaRead);
@@ -90,10 +94,8 @@ namespace Backend.Controllers
                     return NotFound("Nenhum registro encontrado no banco de dados.");
                 }
 
-                // Mapeando para a model
                 empresa = _mapper.Map(empresaUpdateDTO, empresa);
 
-                // Validando os dados informados
                 var empresaValidator = new EmpresaValidator();
                 var validatorResult = empresaValidator.Validate(empresa);
 
@@ -104,7 +106,6 @@ namespace Backend.Controllers
 
                 _empresaRepository.Atualizar(empresa);
 
-                // Mapeando o retorno para o ReadDTO
                 var empresaAtualizadaRead = _mapper.Map<EmpresaReadDTO>(empresa);
 
                 return Ok(new

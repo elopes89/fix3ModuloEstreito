@@ -7,7 +7,6 @@ namespace Backend.Repositories
 {
     public class EmpresaRepository : IEmpresaRepository
 	{
-        // Injeção de dependência do banco de dados
         private readonly LabSchoolContext _context;
 
         public EmpresaRepository (LabSchoolContext context)
@@ -15,6 +14,10 @@ namespace Backend.Repositories
             _context = context;
         }
        
+        public List<Empresa>? Obter(){
+            return _context.Empresas.ToList();
+        }
+
         public Empresa? ObterPorId (int id)
         {
              return _context.Empresas.FirstOrDefault(x => x.Id.Equals(id));;
@@ -29,5 +32,7 @@ namespace Backend.Repositories
             _context.Empresas.Update(empresa);
             _context.SaveChanges();
         }
+
+        
     }
 }

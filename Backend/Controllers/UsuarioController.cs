@@ -174,7 +174,6 @@ public class UsuarioController : ControllerBase
         }
     }
 
-    // public ActionResult<UsuarioReadDTO> Put(int id, [FromBody] UsuarioUpdateDTO usuarioUpdateDTO)
     [HttpPut("/resetar")]
     public ActionResult PutSenha([FromBody] ResetarSenhaDTO email)
     {

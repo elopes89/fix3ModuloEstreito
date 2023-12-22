@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(LabSchoolContext))]
-    [Migration("20231102070437_teste")]
+    [Migration("20231208065949_teste")]
     partial class teste
     {
         /// <inheritdoc />
@@ -252,9 +252,14 @@ namespace Backend.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<string>("Detalhes")
+                    b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(60)
+                        .HasMaxLength(50)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("VARCHAR");
 
                     b.Property<int>("Usuario_Id")

@@ -17,7 +17,6 @@ namespace Backend.Controllers
     public class ExercicioController : ControllerBase
 	{
 
-        // Injeção de dependência do repositório e mapper
         private readonly IExercicioRepository _exercicioRepository;
         private readonly IMapper _mapper;
 
@@ -27,7 +26,6 @@ namespace Backend.Controllers
             _mapper = mapper;
         }
 
-        // Endpoints
         [HttpGet]
         public ActionResult<IEnumerable<ExercicioReadDTO>> GetAll()
         {
@@ -106,10 +104,8 @@ namespace Backend.Controllers
         {
             try
             {
-                // Mapeando para a model
                 var novoExercicio = _mapper.Map<Exercicio>(exercicioCreateDTO);
 
-                // Validando os dados informados
                 var exercicioValidator = new ExercicioValidator();
                 var validatorResult = exercicioValidator.Validate(novoExercicio);
 
@@ -120,7 +116,6 @@ namespace Backend.Controllers
 
                 _exercicioRepository.Adicionar(novoExercicio);
 
-                // Mapeando o retorno para o ReadDTO
                 var novoExercicioRead = _mapper.Map<ExercicioReadDTO>(novoExercicio);
 
                 return Created("Exercicio criado com sucesso!", novoExercicioRead);
@@ -144,10 +139,8 @@ namespace Backend.Controllers
                     return NotFound("Nenhum registro encontrado no banco de dados.");
                 }
 
-                // Mapeando para a model
                 exercicio = _mapper.Map(exercicioUpdateDTO, exercicio);
 
-                // Validando os dados informados
                 var exercicioValidator = new ExercicioValidator();
                 var validatorResult = exercicioValidator.Validate(exercicio);
 
@@ -158,7 +151,6 @@ namespace Backend.Controllers
 
                 _exercicioRepository.Atualizar(exercicio);
 
-                // Mapeando o retorno para o ReadDTO
                 var exercicioAtualizadoRead = _mapper.Map<ExercicioReadDTO>(exercicio);
                 return Ok(new
             {

@@ -9,7 +9,6 @@ namespace Backend.Repositories;
 
 public class UsuarioRepository : IUsuarioRepository
 {
-    // Injeção de dependência do banco de dados
     private readonly LabSchoolContext _context;
 
     public UsuarioRepository(LabSchoolContext context)
@@ -18,7 +17,6 @@ public class UsuarioRepository : IUsuarioRepository
         _context = context;
     }
 
-    // Obter todos
     public List<Usuario> ObterTodos(int empresaId, string tipo = null, string nome = null, string telefone = null, string cpf = null)
     {
         var usuarios = _context.Usuarios.Where(u => u.Empresa_Id == empresaId).ToList();
@@ -46,26 +44,22 @@ public class UsuarioRepository : IUsuarioRepository
         return usuarios;
     }
 
-    // Obter por id
     public Usuario? ObterPorId(int id)
     {
         return _context.Usuarios.FirstOrDefault(x => x.Id.Equals(id));
     }
 
-    // Obter por email
     public Usuario? ObterPorEmail(string email)
     {
         return _context.Usuarios.FirstOrDefault(x => x.Email.Equals(email));
     }
 
-    // Adicionar
     public void Adicionar(Usuario usuario)
     {
         _context.Usuarios.Add(usuario);
         _context.SaveChanges();
     }
 
-    // Deletar
     public void Delete(int id)
     {
         var usuario = _context.Usuarios.FirstOrDefault(x => x.Id.Equals(id));
@@ -74,18 +68,15 @@ public class UsuarioRepository : IUsuarioRepository
         _context.SaveChanges();
     }
 
-    // Atualizar
     public void Atualizar(Usuario usuario)
     {
         _context.Usuarios.Update(usuario);
         _context.SaveChanges();
     }
 
-    // Resetar senha
     public void ResetarSenha(Usuario usuario)
     {
         var reset = new ResetarSenhaDTO();
-        // usuario.Senha = reset.Senha;
         _context.Usuarios.Update(usuario);
         _context.SaveChanges();
     }

@@ -249,9 +249,14 @@ namespace Backend.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<string>("Detalhes")
+                    b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(60)
+                        .HasMaxLength(50)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("VARCHAR");
 
                     b.Property<int>("Usuario_Id")

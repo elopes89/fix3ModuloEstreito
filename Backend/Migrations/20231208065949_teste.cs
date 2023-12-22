@@ -171,9 +171,10 @@ namespace Backend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Usuario_Id = table.Column<int>(type: "int", nullable: false),
+                    Tipo = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false),
+                    Nome = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false),
                     Acao = table.Column<string>(type: "VARCHAR(30)", maxLength: 30, nullable: false),
-                    Data = table.Column<string>(type: "VARCHAR(20)", maxLength: 20, nullable: false),
-                    Detalhes = table.Column<string>(type: "VARCHAR(60)", maxLength: 60, nullable: false)
+                    Data = table.Column<string>(type: "VARCHAR(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {

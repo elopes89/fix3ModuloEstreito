@@ -220,8 +220,6 @@ namespace Backend.Context
             modelBuilder.Entity<Log>()
                 .HasOne(x => x.Usuario)
                 .WithMany(y => y.Logs);
-            // .Metadata
-            // .DeleteBehavior = DeleteBehavior.Restrict;
 
             base.OnModelCreating(modelBuilder);
         }

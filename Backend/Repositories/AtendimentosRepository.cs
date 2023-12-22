@@ -7,7 +7,6 @@ namespace Backend.Repositories
 {
     public class AtendimentosRepository : IAtendimentosRepository
     {
-        // Injeção de dependência do banco de dados
         private readonly LabSchoolContext _context;
 
         public AtendimentosRepository(LabSchoolContext context)
