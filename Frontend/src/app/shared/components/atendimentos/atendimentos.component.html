@@ -1,13 +1,12 @@
+<div *ngIf="permissao == 'Administrador' || permissao == 'Pedagogo'">
 <div class="container">
 
-  <!-- Título da página -->
   <h1 class="container-title">
     Atendimentos
   </h1>
 
-  <!-- Botão registrar -->
   <div class="container-btn-registrar">
-    <button id="btn-registrar" 
+    <button id="btn-registrar"
     class="btn btn-success d-grid w-100"
     (click)="redirecionarFormCriarAtendimento()">
       Adicionar um novo atendimento
@@ -15,31 +14,28 @@
 
   </div>
 
-  <!-- Buscar -->
   <div class="container-form">
     <form id="form-search" class="d-flex" role="search">
 
-      <input class="form-control me-2" 
-      name="search" 
-      type="search" 
+      <input class="form-control me-2"
+      name="search"
+      type="search"
       placeholder="Procurar atendimento pelo nome do aluno..."
-      aria-label="Search" 
+      aria-label="Search"
       [(ngModel)]="pesquisa">
 
-      <button id="form-search-btn" 
-      class="btn btn-link" 
+      <button id="form-search-btn"
+      class="btn btn-link"
       (click)="search()">
         Buscar
       </button>
     </form>
   </div>
 
-  <!--Cards -->
   <div class="container-cards">
 
-    <div *ngFor="let atendimento of atendimentos" 
+    <div *ngFor="let atendimento of atendimentos"
     class="container-cards-card">
-      <!-- Info -->
       <p class="container-cards-card-p">
         Data
         <span class="container-cards-card-span">
@@ -68,12 +64,11 @@
         </span>
       </p>
 
-      <!-- Botões -->
       <div class="container-cards-card-ctn-button">
-        <button 
+        <button
         (click)="redirecionarFormEditarAtendimento(atendimento.id)" class="container-cards-card-ctn-button-editar">
           Editar
-          <img src="../../../../assets/dashboard/pencil.svg" 
+          <img src="../../../../assets/dashboard/pencil.svg"
           style="height: 13px;">
         </button>
 
@@ -81,7 +76,8 @@
           <img src="../../../../assets/dashboard/trash.svg">
           Deletar
         </button>
-        
+
       </div>
     </div>
   </div>
+</div>

@@ -116,7 +116,7 @@
         length="14"
         class="form-control"
         formControlName="cpf"
-        [mask]="telMask"
+        mask="000.000.000-00"
         placeholder="kkk"
       />
       <label for="cpf">CPF</label>
@@ -126,7 +126,6 @@
       <input
         type="text"
         length="16"
-        [(ngModel)]="foneModel"
         mask="(00) 0 0000-0000"
         [ngClass]="{
           'is-invalid': submitted && registerForm.controls?.['telefone']?.errors
@@ -134,9 +133,8 @@
         formControlName="telefone"
         class="form-control"
         placeholder="(00) 0 0000-0000"
-
       />
-      <label for="telefone">Telefone</label>
+      <label for="floatingInputValue">Telefone</label>
 
       <div
         *ngIf="submitted && registerForm.controls?.['telefone']?.errors"
@@ -161,15 +159,16 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <div class="col-md">
-          <label for="senha">Senha</label>
+      <div class="col-md">
+      <div class="form-floating">
           <input
             type="password"
             [ngClass]="{'is-invalid': submitted && registerForm.controls?.['senha']?.errors}"
             formControlName="senha"
             class="form-control"
+            placeholder="Senha"
           />
+          <label for="floatingInputValue">Senha</label>
           <div
             *ngIf="submitted && registerForm.controls?.['senha']?.errors"
             class="text-danger"
@@ -232,9 +231,14 @@
   </form>
 
   <div class="div-btn" style="display: flex; justify-content: space-between">
-    <button [disabled]="!disBotao" class="btn btn-warning" (click)="Editar()">
-      EDITAR
-    </button>
+    <div>
+      <button [disabled]="!disBotao" class="btn btn-warning" (click)="Editar()">
+        EDITAR
+      </button>
+      <button [disabled]="!disBotao" class="btn btn-danger" (click)="deletar()">
+        APAGAR
+      </button>
+    </div>
     <button
       [disabled]="disBotao"
       (click)="OnSubmitUser()"

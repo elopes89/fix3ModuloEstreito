@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IEndereco } from 'src/app/shared/interfaces/IEndereco';
 import { IUsuario } from 'src/app/shared/interfaces/IUsuario';
 import { FrontService } from 'src/app/shared/services/front.service';
-import { IUsuarioInput } from '../../interfaces/IUsuarioInput';
 
 @Component({
   selector: 'app-form-criar-usuario',
@@ -23,11 +22,11 @@ export class FormCriarUsuarioComponent {
   usuarios: Array<IUsuario> = [];
   usuariosInp: Array<IUsuario> = [];
   cepBool = false;
+
   constructor(private formBuilder: FormBuilder, private frontService: FrontService, private router: Router
     , private route: ActivatedRoute) {
     this.frontService.atvBotao = false;
   }
-
 
   BuscaCep() {
     this.frontService.getCep(this.cepGet?.value).subscribe((ceps => {
@@ -43,12 +42,14 @@ export class FormCriarUsuarioComponent {
     });
   }
 
+
   salvarUserEnd() {
     this.frontService.add(this.registerForm.value, this.usuarios, "api/usuarios").subscribe((user => {
-      user.telefone = this.frontService.AjustFone(this.registerForm.get('telefone')?.value);
-
       this.usuariosInp.push(user);
     }));
+    this.frontService.SalvarLog("salvou um usuário ");
+    this.frontService.addLog();
+    this.router.navigate([`/private/dashboard`])
   }
 
   telefone: any
@@ -56,8 +57,7 @@ export class FormCriarUsuarioComponent {
     this.submitted = true;
     if (this.registerForm.invalid) {
       return
-    } else {
-      this.updateName();
+      } else {
       this.salvarUserEnd();
     }
   }
@@ -67,6 +67,7 @@ export class FormCriarUsuarioComponent {
     this.frontService.edit(this.registerForm.value, id).subscribe(user => {
       this.usuariosInp.push(user);
     });
+    this.router.navigate([`/private/dashboard`])
   }
   Editar() {
     this.submitted = true;
@@ -74,30 +75,29 @@ export class FormCriarUsuarioComponent {
       return
     } else {
       this.Update();
+      this.frontService.SalvarLog("editou um usuário ");
+      this.frontService.addLog();
     }
   }
-  fone = ''
-  getFone() {
-    if (this.registerForm.get('cpf')?.value.length < 12) {
-      this.telMask = "000.000.000-00";
-    }
-    else
-      this.telMask = "000.000.000-00";
-    return this.telMask;
+
+  deletar() {
+    const id = Number(this.route.snapshot.paramMap.get('id'))
+    this.frontService.del(id).subscribe(deletado => {
+      console.log(deletado);
+    });
+    this.router.navigate([`/private`])
   }
-  telMask = "000.000.000-00"
-  foneModel = '';
   async ngOnInit() {
     this.registerForm = this.formBuilder.group({
       id: [this.usuarioData ? this.usuarioData.id : 0],
       nome: [this.usuarioData ? this.usuarioData.nome : ''],
       email: [this.usuarioData ? this.usuarioData.email : ''],
       cpf: [this.usuarioData ? this.usuarioData.cpf : '', [Validators.required]],
-      telefone: [this.usuarioData ? this.usuarioData.telefone : this.foneModel, [Validators.required]],
+      telefone: [this.usuarioData ? this.usuarioData.telefone : ''],
       genero: [this.usuarioData ? this.usuarioData.genero : ''],
       tipo: [this.usuarioData ? this.usuarioData.tipo : ''],
       status_sistema: [this.usuarioData ? true : true],
-      senha: [this.usuarioData ? this.usuarioData.senha : '876543210'],
+      senha: [this.usuarioData ? this.usuarioData.senha : ''],
       matricula_Aluno: [this.usuarioData ? this.usuarioData.matricula_Aluno : '1'],
       codigo_Registro_Professor: [this.usuarioData ? this.usuarioData.codigo_Registro_Professor : 1],
       empresa_Id: [this.usuarioData ? this.usuarioData.empresa_Id : 1],
@@ -110,10 +110,6 @@ export class FormCriarUsuarioComponent {
       complemento: [this.usuarioData ? this.usuarioData.complemento : ''],
     });
   }
-
-  updateName() {
-    this.foneModel = this.frontService.AjustFone(this.registerForm.get('telefone')?.value);
-    }
   get cepGet() {
     return this.registerForm.get('cep')
   }

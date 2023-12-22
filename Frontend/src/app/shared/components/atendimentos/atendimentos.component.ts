@@ -13,6 +13,8 @@ export class AtendimentosComponent implements OnInit {
   atendimentos: any[] = []
   atendimentoOriginal: any[] = []
   pesquisa: string = ''
+  permissao = sessionStorage.getItem('userTipo')
+
 
   constructor(private service: DetalhamentoAlunoService, private route: Router) { }
 
@@ -26,7 +28,7 @@ export class AtendimentosComponent implements OnInit {
       console.log(this.atendimentos)
       this.atendimentos = this.atendimentoOriginal
         .filter(user =>
-          user.aluno_nome['nome'].toLowerCase().includes(this.pesquisa.toLowerCase()) 
+          user.aluno_nome['nome'].toLowerCase().includes(this.pesquisa.toLowerCase())
         );
 
       if (this.atendimentos.length === 0) {
@@ -40,8 +42,6 @@ export class AtendimentosComponent implements OnInit {
     }
   }
 
-
-  // Métodos atendimentos
   getAtendimentos() {
     this.service.getAtendimentos()
       .subscribe((result) => {

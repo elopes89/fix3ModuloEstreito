@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ListagemUsuariosService } from '../../services/listagem-usuarios.service';
 import { EmpresaService } from '../../services/empresa.service';
+import { IEmpresa } from '../../interfaces/IEmpresa';
+import { FrontService } from '../../services/front.service';
 
 @Component({
   selector: 'app-empresa',
@@ -11,79 +13,73 @@ import { EmpresaService } from '../../services/empresa.service';
 })
 export class EmpresaComponent {
 
-  editarForm: FormGroup
+  registerForm!: FormGroup
   empresaId = 1
-
+  listaEmpresas: Array<IEmpresa> = [];
+  showHide = false;
   empresa = {
     nome_Empresa: '',
-    slogan:  '',
+    slogan: '',
     paleta_Cores: '',
     logotipo_URL: '',
-    demais_Infos: '' 
+    demais_Infos: ''
   }
+  cs = this.service.corCard
+  constructor(private service: EmpresaService, private fs: FrontService, private router: Router) { }
+  ngOnInit() {
+    this.gerarListaValores();
+      this.registerForm = new FormGroup({
+        'nome': new FormControl('', [Validators.required]),
 
-  constructor(private service: EmpresaService,
-    private router: Router) {
+        'slogan': new FormControl('', [Validators.required]),
 
-    // Formulário
-    this.editarForm = new FormGroup({
-      'nome': new FormControl('', [Validators.required]),
+        'cores': new FormControl(''),
 
-      'slogan': new FormControl('', [Validators.required]),
+        'logo': new FormControl(''),
 
-      'cores': new FormControl(''),
-
-      'logo': new FormControl(''),
-
-      'info': new FormControl(''),
-    });
+        'info': new FormControl(''),
+      });
   }
-
-  ngOnInit(){
-    this.getEmpresa(this.empresaId)
+  showForm(){
+     this.showHide = !this.showHide
   }
-  // Pegando os dados da empresa
-  getEmpresa(id: number){
-    this.service.getEmpresa(id)
-      .subscribe((result) => {
-        this.empresa = result
-        console.log(this.empresa)
-        this.editarForm.patchValue({
-          'nome': this.empresa.nome_Empresa,
-          'logo': this.empresa.logotipo_URL,
-          'cores': this.empresa.paleta_Cores,
-          'info': this.empresa.demais_Infos,
-          'slogan': this.empresa.slogan
-        })
-      })
-  }
-
-
-  // Validação dos campo
   mensagemErro(campo: string) {
-    return (this.editarForm.get(campo)?.value === null || this.editarForm.get(campo)?.value.length === 0) && this.editarForm.get(campo)?.touched
+    return (this.registerForm.get(campo)?.value === null || this.registerForm.get(campo)?.value.length === 0) && this.registerForm.get(campo)?.touched
   }
 
-  // Submit
-  editarEmpresa(){
-    const nomeEmpresa = this.editarForm.get('nome')?.value
-    const logo = this.editarForm.get('logo')?.value
-    const slogan = this.editarForm.get('slogan')?.value
-    const cores = this.editarForm.get('cores')?.value
-    const info = this.editarForm.get('info')?.value
+  SalvarEmpresa() {
+    const nomeEmpresa = this.registerForm.get('nome')?.value
+    const logo = this.registerForm.get('logo')?.value
+    const slogan = this.registerForm.get('slogan')?.value
+    const cores = this.registerForm.get('cores')?.value
+    const info = this.registerForm.get('info')?.value
 
     const novosDados = {
       "nome_Empresa": nomeEmpresa,
-      "slogan":  slogan,
-      "paleta_Cores": cores,
+      "slogan": slogan,
+      "paleta_Cores": cores.toString(),
       "logotipo_URL": logo,
-      "demais_Infos": info 
+      "demais_Infos": info
     }
 
-    this.service.updateEmpresa(this.empresaId, novosDados)
-      .subscribe((result) => {
-        console.log(result)
-        alert("Dados atualizados com sucesso!")
-      })
+    this.service.salvar(novosDados).subscribe(res => {
+      console.log("Dados atualizados com sucesso! " + res);
+      this.showHide = false;
+      this.gerarListaValores();
+    });
+    sessionStorage.setItem('paleta', cores)
   }
+
+  gerarListaValores() {
+    this.fs.getAll("api/whitelabel", this.listaEmpresas)
+      .subscribe((data) => {
+        this.listaEmpresas = data
+      })
+  };
+
+  redirecionarFormEditar(id: number | undefined) {
+    this.router.navigate([`/private/editar-empresa/${id}`])
+  }
+
+
 }

@@ -1,9 +1,7 @@
-<div class="container">
+<div class="container" *ngIf="permissao == 'Administrador'">
 
-    <!-- Dados do aluno -->
     <section>
         <h2 class="container-title">Informações do aluno</h2>
-        <!-- Dados aluno -->
         <div class="div-container-table">
             <table class="container-table">
                 <thead class="container-table-header">
@@ -66,7 +64,6 @@
     </section>
 
 
-    <!-- Atendimentos -->
     <section>
         <h3 class="container-subtitle">
             Histórico de atendimentos
@@ -75,7 +72,6 @@
         <div class="container-cards">
 
             <div *ngFor="let atendimento of atendimentos" class="container-cards-card">
-                <!-- Info -->
                 <p class="container-cards-card-p">
                     Data
                     <span class="container-cards-card-span">{{atendimento.data}}</span>
@@ -107,7 +103,6 @@
 
     </section>
 
-     <!-- Exercicios -->
      <section>
         <h3 class="container-subtitle">
             Histórico de exercícios
@@ -115,7 +110,6 @@
 
         <div class="container-cards">
             <div *ngFor="let exercicio of exercicios" class="container-cards-card">
-                <!-- Info -->
                 <p class="container-cards-card-p">
                     Data
                     <span class="container-cards-card-span">{{exercicio.data_Conclusao}}</span>

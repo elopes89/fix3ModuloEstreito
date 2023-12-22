@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { DashboardService } from '../../services/dashboard.service';
 import { ListagemUsuariosService } from '../../services/listagem-usuarios.service';
 import { Router } from '@angular/router';
+import { FrontService } from '../../services/front.service';
+import { EmpresaService } from '../../services/empresa.service';
 
 @Component({
   selector: 'app-listagem-usuarios',
@@ -9,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./listagem-usuarios.component.css']
 })
 export class ListagemUsuariosComponent {
+[x: string]: any;
 
   @Input()
   tipoUsuario: string = ''
@@ -17,15 +20,17 @@ export class ListagemUsuariosComponent {
   listaValoresFiltro: any[] = []
   titulo: string = ''
   pesquisa: string = ''
+  cores = true;
+  cs = sessionStorage.getItem('paleta');
 
 
-  constructor(private listagemUsuariosService: ListagemUsuariosService, private route: Router) { }
+  constructor(private listagemUsuariosService: ListagemUsuariosService, private route: Router,
+     private enterS: EmpresaService) { }
 
   ngOnInit() {
     this.gerarListaValores();
   }
 
-  // Método para pegar a lista de usuários
   gerarListaValores() {
     if (this.tipoUsuario == "Administrador") {
       this.listagemUsuariosService.getUsuarios()
@@ -78,7 +83,6 @@ export class ListagemUsuariosComponent {
   deletarUsuario(idUsuario: number) {
     this.listagemUsuariosService.deleteUsuario(idUsuario)
       .subscribe(() => {
-        alert("Deletado com sucesso!")
         this.gerarListaValores
         this.gerarListaValores();
 

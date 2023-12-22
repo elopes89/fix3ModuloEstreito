@@ -19,6 +19,7 @@ export class FormEditarUsuarioComponent {
   disBotao = this.frontService.atvBotao;
   usuarios!: IUsuario;
   endId = 0;
+  permissao = sessionStorage.getItem('userTipo');
   constructor(private formBuilder: FormBuilder, private frontService: FrontService,
     private active: ActivatedRoute, private router: Router) {
 
@@ -32,6 +33,5 @@ export class FormEditarUsuarioComponent {
       console.log(this.usuarios);
     });
   }
-
 }
 

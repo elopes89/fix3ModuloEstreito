@@ -1,49 +1,41 @@
 <div class="container">
+  <h2 class="container-title">Dashboard</h2>
 
-    <h2 class="container-title">Dashboard</h2>
+  <section class="container-cards">
+    <div class="container-cards-card">
+      <h4 class="container-cards-card-title">
+        {{ quantidadeAlunos }}
+        <span class="container-cards-card-title-span">alunos cadastrados </span>
+      </h4>
+    </div>
 
-    <!-- Cards quantidades -->
-    <section class="container-cards">
-        <div class="container-cards-card">
-            <h4 class="container-cards-card-title">
-                {{quantidadeAlunos}}
-                <span class="container-cards-card-title-span
-                ">alunos cadastrados
-                </span>
-            </h4>
-        </div>
+    <div class="container-cards-card">
+      <h4 class="container-cards-card-title">
+        {{ quantidadeExercicios }}
+        <span class="container-cards-card-title-span"
+          >exercícios cadastrados
+        </span>
+      </h4>
+    </div>
 
-        <div class="container-cards-card">
-            <h4 class="container-cards-card-title">
-                {{quantidadeExercicios}}
-                <span class="container-cards-card-title-span
-                ">exercícios cadastrados
-                </span>
-            </h4>
-        </div>
+    <div class="container-cards-card">
+      <h4 class="container-cards-card-title">
+        {{ quantidadeAvaliacoes }}
+        <span class="container-cards-card-title-span"
+          >avaliações cadastrados
+        </span>
+      </h4>
+    </div>
 
-        <div class="container-cards-card">
-            <h4 class="container-cards-card-title">
-                {{quantidadeAvaliacoes}}
-                <span class="container-cards-card-title-span
-                ">avaliações cadastrados
-                </span>
-            </h4>
-        </div>
+    <div class="container-cards-card">
+      <h4 class="container-cards-card-title">
+        {{ quantidadeAtendimentos }}
+        <span class="container-cards-card-title-span"
+          >atendimentos cadastrados
+        </span>
+      </h4>
+    </div>
+  </section>
 
-        <div class="container-cards-card">
-            <h4 class="container-cards-card-title">
-                {{quantidadeAtendimentos}}
-                <span class="container-cards-card-title-span
-                ">atendimentos cadastrados
-                </span>
-            </h4>
-        </div>
-    </section>
-
-    <!-- Componente listagem usuários -->
-    <app-listagem-usuarios
-    [tipoUsuario]="tipoUsuario">
-    </app-listagem-usuarios>
-
+  <app-listagem-usuarios [tipoUsuario]="tipoUsuario"> </app-listagem-usuarios>
 </div>

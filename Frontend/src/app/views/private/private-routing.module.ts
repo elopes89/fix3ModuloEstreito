@@ -12,6 +12,8 @@ import { FormCriarAtendimentoComponent } from 'src/app/shared/components/form-cr
 import { FormEditarExercicioComponent } from 'src/app/shared/components/form-editar-exercicio/form-editar-exercicio.component';
 import { FormCriarExercicioComponent } from 'src/app/shared/components/form-criar-exercicio/form-criar-exercicio.component';
 import { FormEditarUsuarioComponent } from 'src/app/shared/components/form-editar-usuario/form-editar-usuario.component';
+import { LogsComponent } from 'src/app/shared/components/logs/logs.component';
+import { EditarEmpresaComponent } from 'src/app/shared/components/editar-empresa/editar-empresa.component';
 
 
 const routes: Routes = [
@@ -19,17 +21,19 @@ const routes: Routes = [
     path: '', component: PrivateComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'logs', component: LogsComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'empresa', component: EmpresaComponent },
       { path: 'usuarios', component: UsuarioComponent },
       { path: 'atendimentos', component: AtendimentosComponent },
-      { path: 'editar-atendimento/:id', component: FormEditarAtendimentoComponent},
-      { path: 'criar-atendimento', component: FormCriarAtendimentoComponent},
+      { path: 'editar-atendimento/:id', component: FormEditarAtendimentoComponent },
+      { path: 'criar-atendimento', component: FormCriarAtendimentoComponent },
       { path: 'exercicios', component: ExerciciosComponent },
-      { path: 'editar-exercicio/:id', component: FormEditarExercicioComponent},
-      { path: 'criar-exercicio', component: FormCriarExercicioComponent},
-      { path: 'detalhamento-aluno', component: DetalhamentoAlunoComponent},
-      {path: 'editar-usuario/:id', component: FormEditarUsuarioComponent}
+      { path: 'editar-exercicio/:id', component: FormEditarExercicioComponent },
+      { path: 'criar-exercicio', component: FormCriarExercicioComponent },
+      { path: 'detalhamento-aluno', component: DetalhamentoAlunoComponent },
+      { path: 'editar-usuario/:id', component: FormEditarUsuarioComponent },
+      { path: 'editar-empresa/:id', component: EditarEmpresaComponent }
     ]
   }
 ];

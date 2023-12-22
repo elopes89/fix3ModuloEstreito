@@ -12,6 +12,7 @@ import { PublicModule } from './views/public/public.module';
 import { PrivateModule } from './views/private/private.module';
 import { LogsComponent } from './shared/components/logs/logs.component';
 import { ResetComponent } from './views/reset/reset.component';
+import { EditarEmpresaComponent } from './shared/components/editar-empresa/editar-empresa.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ResetComponent } from './views/reset/reset.component';
     NotFoundComponent,
     LogsComponent,
     NotFoundComponent,
-    ResetComponent
+    ResetComponent,
+    EditarEmpresaComponent
   ],
   imports: [
     BrowserModule,

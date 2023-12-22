@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
+import { FrontService } from 'src/app/shared/services/front.service';
+import { Component, Input } from '@angular/core';
 import { ListagemUsuariosService } from '../../services/listagem-usuarios.service';
-import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { IAtendimento } from '../../interfaces/IAtendimento';
+import { IUsuario } from '../../interfaces/IUsuario';
+import { serviceAtendimento } from '../../services/serviceAtendimento';
 
 @Component({
   selector: 'app-form-criar-atendimento',
@@ -9,43 +13,107 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form-criar-atendimento.component.css']
 })
 export class FormCriarAtendimentoComponent {
+  @Input() atendiData: IAtendimento | null = null;
 
+  usuarios: Array<IUsuario> = [];
   alunos: any[] = []
   pedagogos: any[] = []
-
-  registrarForm: FormGroup
-  postData = {
-    data: '',
-    descricao: '',
-    aluno_id: 0,
-    pedagogo_id: 0
+  permissao = sessionStorage.getItem('userTipo')
+  registerForm!: FormGroup;
+  atendimentos!: IAtendimento;
+  constructor(private formBuilder: FormBuilder, private active: ActivatedRoute, private sa: serviceAtendimento,
+    private service: ListagemUsuariosService, private route: Router, private fr: FrontService) {
   }
 
-  constructor(private service: ListagemUsuariosService, private route: Router) {
-    // Criação do formulário
-    this.registrarForm = new FormGroup({
-      'aluno': new FormControl('', Validators.required),
-      'pedagogo': new FormControl('', Validators.required),
-      'descricao': new FormControl('', Validators.required),
-      'data': new FormControl('', Validators.required),
-    })
+  Up() {
+    const id = Number(this.active.snapshot.paramMap.get('id'))
+    const data = this.registerForm.get('data')?.value
+    const formatData = this.formatarData(data)
+    const alunoNumber = this.atendiData ? this.atendiData.aluno_id : this.nomeAlunoEId()
+    const pedNumber = this.atendiData ? this.atendiData.pedagogo_id : this.nomePedEId()
+
+    const postData = {
+      "descricao": this.registerForm.get('descricao')?.value,
+      "data": formatData,
+      "pedagogo_id": pedNumber,
+      "aluno_id": alunoNumber
+    }
+    this.sa.editar(postData, id).subscribe(user => {
+      console.log(user);
+    });
+    this.route.navigate(["/private/atendimentos"]);
   }
+
+
+  nomeAlunoEId() {
+    var id;
+    const nome = this.registerForm.get("aluno_nome")?.value
+    for (let i = 0; i < this.alunos.length; i++) {
+      if (this.alunos[i].nome == nome) {
+        id = i;
+      }
+    }
+    return id;
+  }
+
+  nomePedEId() {
+    var id;
+    const nome = this.registerForm.get("pedagogo_nome")?.value
+    for (let i = 0; i < this.pedagogos.length; i++) {
+      if (this.pedagogos[i].nome == nome) {
+        id = i;
+      }
+    }
+    return id;
+  }
+
+  criarAtendimento() {
+    const aluno = this.nomeAlunoEId()
+    const pedagogo = this.nomePedEId()
+    const data = this.registerForm.get('data')?.value
+    const formatData = this.formatarData(data)
+
+    const postData = {
+      "descricao": this.registerForm.get('descricao')?.value,
+      "data": formatData,
+      "pedagogo_id": pedagogo,
+      "aluno_id": aluno
+    }
+    this.sa.cadastrar(postData).subscribe(atendi => {
+      console.log(atendi);
+      this.fr.SalvarLog("Criou um atendimento");
+      this.fr.addLog();
+      alert("Salvo")
+      this.route.navigate(["/private/atendimentos"])
+    });
+  }
+
 
   ngOnInit() {
     this.getAlunos();
     this.getPedagogos();
+    this.registerForm = this.formBuilder.group({
+      id: [this.atendiData ? this.atendiData.id : 0],
+      aluno_nome: [this.atendiData ? this.atendiData.aluno_nome?.nome : '', [Validators.required]],
+      pedagogo_nome: [this.atendiData ? this.atendiData.pedagogo_nome?.nome : '', [Validators.required]],
+      descricao: [this.atendiData ? this.atendiData.descricao : ''],
+      data: [this.atendiData ? this.formatarDataInput(this.atendiData.data) : ''],
+    })
+
+    const id = Number(this.active.snapshot.paramMap.get('id'))
+    this.sa.obterAtendimentoPorId(id).subscribe(atendi => {
+      this.atendimentos = atendi;
+    });
+
   }
 
-  // Lista de alunos
   getAlunos() {
     this.service.getAlunos()
       .subscribe((result) => {
         this.alunos = result
-        console.log(this.alunos)
       })
   };
 
-  // Lista de pedagogos
   getPedagogos() {
     this.service.getPedagogos()
       .subscribe((result) => {
@@ -53,45 +121,21 @@ export class FormCriarAtendimentoComponent {
       })
   };
 
-  // Criar atendimento
-  criarAtendimento(){
-    const aluno = this.registrarForm.get('aluno')?.value
-    const pedagogo = this.registrarForm.get('pedagogo')?.value
-    const descricao = this.registrarForm.get('descricao')?.value
-    const data = this.registrarForm.get('data')?.value
-
-    const dataFormatada = this.formatarData(data)
-    const alunoNumber =  parseInt(aluno)
-    const pedagogoNumber =  parseInt(pedagogo)
-    
-    this.postData = {
-      "data": dataFormatada,
-      "descricao": descricao,
-      "aluno_id": alunoNumber,
-      "pedagogo_id": pedagogoNumber
-    }
-
-    this.service.postPedagogo(this.postData)
-    .subscribe((result) => {
-      console.log(result)
-      alert("Novo atendimento criado com sucesso!")
-     this.route.navigate(['/private/atendimentos'])
-    })
+  formatarDataInput(data: string) {
+    const parts = data.split('/')
+    return `${parts[2]}-${parts[1]}-${parts[0]}`;
   }
 
-  // Validação dos campo
   mensagemErro(campo: string) {
-    return (this.registrarForm.get(campo)?.value === null || this.registrarForm.get(campo)?.value.length === 0) && this.registrarForm.get(campo)?.touched
+    return (this.registerForm.get(campo)?.value === null || this.registerForm.get(campo)?.value.length === 0) && this.registerForm.get(campo)?.touched
   }
 
   mensagemErroSelect(campo: string) {
-    return (this.registrarForm.get(campo)?.value === '' || this.registrarForm.get(campo)?.value === 'Selecione') && this.registrarForm.get(campo)?.touched
+    return (this.registerForm.get(campo)?.value === '' || this.registerForm.get(campo)?.value === 'Selecione') && this.registerForm.get(campo)?.touched
   }
 
-  // Método edição do formato da data
   formatarData(data: string) {
     const parts = data.split('-')
     return `${parts[2]}/${parts[1]}/${parts[0]}`
   }
-
 }

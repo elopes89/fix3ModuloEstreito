@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="permissao == 'Professor' || permissao == 'Administrador'">
 
   <h1 class="container-title">
     Exercícios
@@ -32,7 +32,6 @@
 
   <div class="container-cards">
     <div *ngFor="let exercicio of exercicios" class="container-cards-card">
-        <!-- Info -->
         <p class="container-cards-card-p">
             Data
             <span class="container-cards-card-span">{{exercicio.data_Conclusao}}</span>
@@ -53,7 +52,6 @@
           Aluno
           <span class="container-cards-card-span">{{exercicio.aluno_nome.nome}}</span>
       </p>
-         <!-- Botões -->
          <div class="container-cards-card-ctn-button">
             <button (click)="redirecionarFormEditarExercicio(exercicio.id)"
             class="container-cards-card-ctn-button-editar">

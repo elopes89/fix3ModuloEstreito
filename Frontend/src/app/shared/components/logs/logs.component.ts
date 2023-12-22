@@ -10,15 +10,20 @@ import { Router } from '@angular/router';
 })
 export class LogsComponent {
 
+  logs: Array<ILog> = [];
+  permissao = sessionStorage.getItem('userTipo');
   constructor(private frontService: FrontService, private router: Router) {
     this.Buscar();
+    this.frontService.SalvarLog("visualizou os Logs do sistema");
+    this.frontService.addLog();
   }
 
   Buscar() {
-    this.frontService.getAll("ListarLogs", this.logs).subscribe(user => {
-      this.logs = user;
-      console.log(user);
+    this.frontService.getAll("api/logs", this.logs).subscribe(log => {
+      this.logs = log;
+      console.log(log);
     });
   }
-  logs: Array<ILog> = [];
+
+
 }

@@ -24,7 +24,7 @@ export class UsuarioComponent implements OnInit {
   usuariosOriginal: Array<IUsuario> = [];
   endId = 0;
   pesquisa: string = ''
-
+  tipoUsuario = sessionStorage.getItem("userTipo")
   constructor(private formBuilder: FormBuilder, private frontService: FrontService, private router: Router) {
     this.Buscar();
   }

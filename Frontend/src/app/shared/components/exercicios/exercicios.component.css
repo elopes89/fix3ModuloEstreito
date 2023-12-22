@@ -61,8 +61,10 @@ input {
   justify-content: center;
   width: 300px;
   padding: 10px;
+  color: white;
   border-radius: 10px;
-  background-color: white;
+  background-color:cornflowerblue;
+  /* background-color:cornflowerblue; */
   margin-top: 30px;
   box-shadow: 0px 0px 10px 0px rgba(95, 100, 104, 0.39);
 }
