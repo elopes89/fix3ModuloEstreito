@@ -1,4 +1,7 @@
-branch: master
+# branch: master
+name: Continuos Integration
+
+on: pull_request
 
 jobs:
 continuos-integration:
@@ -6,13 +9,13 @@ runs-on: ubuntu-latest
 
 steps:
  - uses: actions/checkout@v3
- - name: using Node.js
+ - name: Using Node.js
   uses: actions/setup-node@v2
   with:
-  node-version: 16.
+  node-version: 18.x
 - name: run install, build and test
  run: |
- npx install
- npx run build
- npx run test
+ npm install
+ npm run build
+ npm run test
 
